@@ -3,4 +3,4 @@ project(DataStruct2)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DataStruct2 main.cpp)
+add_executable(DataStruct2 main.cpp HashTable.cpp HashTable.h UnionFind.cpp UnionFind.h)

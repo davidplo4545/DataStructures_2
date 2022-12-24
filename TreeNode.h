@@ -14,8 +14,6 @@ struct TreeNode {
     TreeNode* m_rightSon;
     TreeNode* m_parent;
     int m_height;
-    TreeNode* m_closeAbove;
-    TreeNode* m_closeBelow;
 
     TreeNode(Key id, Value data);
     TreeNode()=default;
@@ -37,8 +35,7 @@ Value TreeNode<Key,Value>::getData()
     return m_data;
 }
 template<class Key, class Value>
-TreeNode<Key,Value>::TreeNode(Key id, Value data) :m_key(id),m_data(data), m_leftSon(nullptr),m_rightSon(nullptr), m_parent(nullptr), m_height(0),
-    m_closeAbove(nullptr), m_closeBelow(nullptr){
+TreeNode<Key,Value>::TreeNode(Key id, Value data) :m_key(id),m_data(data), m_leftSon(nullptr),m_rightSon(nullptr), m_parent(nullptr), m_height(0){
 }
 
 

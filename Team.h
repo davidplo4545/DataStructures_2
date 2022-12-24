@@ -5,9 +5,8 @@
 #ifndef EX1_TEAM_H
 #define EX1_TEAM_H
 #include "AVLTree.h"
-#include "wet1util.h"
+#include "wet2util.h"
 #include "Player.h"
-#include "wet1util.h"
 #include "Exception.h"
 
 class Player;
@@ -18,19 +17,13 @@ class Team {
     int m_strength; // points + sum of (goals - cards) of each player
     int m_gamesPlayed = 0;
     int m_goalKeepersNum;
-    bool m_isOnRanked;
-    bool m_shouldBeDeleted;
-
-    AVLTree<int,Player*>* m_playersTree; // Sorted by ids
-    AVLTree<Player,Player*>* m_rankedPlayersTree; // Sorted by goals > cards> ids
+    bool m_isInSystem;
 
     friend bool operator>(const Team& p1, const Team& p2);
     friend bool operator==(const Team& p1, const Team& p2);
 
     friend std::ostream& operator<<(std::ostream& os,const Team& team);
 
-    void updatePlayersTeam(TreeNode<int,Player*>* currNode);
-    void updateRankedPlayersTeam(TreeNode<Player,Player*>* currNode);
 
 public:
     Team(int id, int points);
@@ -39,32 +32,20 @@ public:
     Team& operator=(const Team& team);
     Team(const Team& team);
 
-    void changeShouldBeDeleted();
-
-    bool isInRanked() const;
-    void setIsInRanked(bool isRanked);
+    bool isInSystem() const;
+    void setIsInSystem(bool isRanked);
     int getId() const;
-    void removePlayer(Player *player);
-    void removePlayerFromRanked(Player *player);
-    void addPlayer(Player *player);
-    void addPlayerToRanked(Player *player);
     int getPoints() const;
     void updatePointsAfterGame(int value);
     int getStrength() const;
     void updateStatsFromTeams(Team* t1, Team* t2);
     void updateStrength(int goals, int cards);
-    void createPlayerTrees(TreeNode<int,Player*>* playersArr[],TreeNode<Player,Player*>* rankedPlayersArr[]);
 
-    bool canBeDeleted() const;
-    Player* getClosestPlayer(int playerId);
     int getPlayersCount() const;
-    void resetPlayersCount();
-    TreeNode<Player, Player*>* getRankedTopNode();
     bool isAbleToPlay() const;
     int getGamesPlayed() const;
 
     Team* playMatch(Team *rival);
-    void getSortedPlayersArray(TreeNode<int,Player*>* playerNodes[], TreeNode<Player,Player*>* rankedPlayerNodes[]);
 
     void printTeamPlayers() const;
 

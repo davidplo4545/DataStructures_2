@@ -14,8 +14,6 @@ class Player {
     int m_goals;
     int m_cardsReceived;
     bool m_isGoalKeeper;
-    TreeNode<Player,Player*>* m_rankNode;
-
 
     friend bool operator>(const Player& p1, const Player& p2);
     friend bool operator==(const Player& p1, const Player& p2);
@@ -27,19 +25,13 @@ public:
     Player() = default;
     ~Player() = default;
 
-    void updateStats(int gamesPlayed, int scoredGoals, int cardsReceived);
     int getGamesPlayed() const;
     void updateGamesPlayedByFactor(int factor);
 
     int getGoals() const;
     int getCards() const;
-    TreeNode<Player,Player*>* getRankNode();
-    void setRankNode(TreeNode<Player,Player*>* rankNode);
 
-    Player* getClosest(TreeNode<Player,Player*>* plNode1, TreeNode<Player,Player*>* plNode2) const;
     int getId() const;
-    void setTeam(Team* team);
-    Team* getTeam();
     bool isGoalKeeper() const;
 };
 

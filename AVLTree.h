@@ -14,7 +14,6 @@ public:
     typedef TreeNode<Key,Value> Node;
 private:
     Node* m_root;
-    Node* m_topNode;
     Node* searchTree(Node* currNode, Key targetKey);
     void insertAux(Key key, Node* newNode, Node* currNode);
     Node* deleteByKeyAux(Key key, Node* root, bool* hasDataChanged);
@@ -22,8 +21,6 @@ private:
     void goBackAndFixHeights(Node* parent);
     void treeToArrayAux(Node* node, Node* arr [], int* index);
     Node* arrayToTreeAux(Node* arr[], int start, int end);
-    void updateClosestNode(Node* currNode, Node* closestNode, bool isAbove);
-    void removeFromClosest(Node* currNode);
     void deleteEntireTree(Node* currNode);
     void deleteEntireTreeDataAux(Node* currNode);
 public:
@@ -35,11 +32,9 @@ public:
 
     Node* insert(Key key, Value data);
     Node* find(Key key);
-    Node* getTopNode();
     Node* getRoot();
 
     Node* findClosestToMinNode(Key minKey);
-    Value getClosest(Key key);
 //    void printBT(const std::string& prefix,const Node* node, bool isLeft) const;
 //    void printBT() const;
     void treeToArray(Node* arr []);
@@ -49,101 +44,13 @@ public:
 
 };
 
-template<class Key, class Value>
-void AVLTree<Key,Value>::updateClosestNode(Node *currNode, Node *closestNode, bool isAbove) {
-    if(closestNode != nullptr)
-    {
-        if(isAbove)
-        {
-            Node* temp = closestNode->m_closeBelow;
-            closestNode->m_closeBelow = currNode;
-            currNode->m_closeAbove = closestNode;
-            if(temp != nullptr)
-            {
-                currNode->m_closeBelow=temp;
-                temp->m_closeAbove=currNode;
-            }
-        }
-        else
-        {
-            Node* temp = closestNode->m_closeAbove;
-            closestNode->m_closeAbove = currNode;
-            currNode->m_closeBelow = closestNode;
-            if(temp != nullptr) {
-                currNode->m_closeAbove = temp;
-                temp->m_closeBelow = currNode;
-            }
-            else
-            {
-                // check for new highest value node
-                if(m_topNode->m_key < currNode->m_key)
-                    m_topNode = currNode;
-            }
 
-        }
-    }
-    else
-        m_topNode = currNode;
-}
-
-
-template<class Key, class Value>
-TreeNode<Key,Value>* AVLTree<Key,Value>::getTopNode() {
-    return m_topNode;
-}
 
 template<class Key, class Value>
 TreeNode<Key,Value>* AVLTree<Key,Value>::getRoot() {
     return m_root;
 }
 
-template<class Key, class Value>
-Value AVLTree<Key,Value>::getClosest(Key key)
-{
-    TreeNode<Key,Value>* node = find(key);
-    if(node == nullptr)
-        return nullptr;
-    if(node->m_closeBelow != nullptr && node->m_closeAbove != nullptr)
-    {
-        Value val = node->m_data;
-        Value closestVal = val->getClosest(node->m_closeAbove->m_data, node->m_closeBelow->m_data);
-        return closestVal;
-    }
-    else{
-        if(node->m_closeAbove != nullptr) return node->m_closeAbove->m_data;
-        else if(node->m_closeBelow != nullptr) return node->m_closeBelow->m_data;
-        else return nullptr;
-    }
-}
-
-template<class Key, class Value>
-void AVLTree<Key,Value>::removeFromClosest(Node *currNode) {
-    // has both closest
-    if(currNode->m_closeBelow != nullptr && currNode->m_closeAbove != nullptr)
-    {
-        currNode->m_closeBelow->m_closeAbove = currNode->m_closeAbove;
-        currNode->m_closeAbove->m_closeBelow = currNode->m_closeBelow;
-    }
-    else
-    {
-        if(currNode->m_closeBelow !=nullptr)
-        {
-            currNode->m_closeBelow->m_closeAbove = nullptr;
-            m_topNode = currNode->m_closeBelow;
-        }
-        else if(currNode->m_closeAbove !=nullptr)
-        {
-            currNode->m_closeAbove->m_closeBelow = nullptr;
-        }
-        else
-        {
-            // there is only a root in the tree
-            m_topNode = nullptr;
-        }
-    }
-    currNode->m_closeAbove = nullptr;
-    currNode->m_closeBelow = nullptr;
-}
 
 template<class Key, class Value>
 void AVLTree<Key,Value>::deleteEntireTree(Node* currNode)
@@ -178,7 +85,7 @@ AVLTree<Key,Value>::~AVLTree(){
 }
 
 template<class Key, class Value>
-AVLTree<Key,Value>::AVLTree():m_root(nullptr), m_topNode(nullptr){
+AVLTree<Key,Value>::AVLTree():m_root(nullptr){
 }
 
 template<class Key, class Value>
@@ -237,7 +144,6 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::insert(Key key, Value data) {
     if (m_root == nullptr)
     {
         m_root = newNode;
-        m_topNode = newNode;
     }
     else {
         try{
@@ -307,7 +213,6 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::deleteByKeyAux(Key key, Node* root, boo
             m_root = newCurr;
             if(newCurr)
                 newCurr->m_parent = nullptr;
-            removeFromClosest(currNode);
             delete currNode;
             return newCurr;
         }
@@ -320,7 +225,6 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::deleteByKeyAux(Key key, Node* root, boo
         {
             prevNode->m_rightSon=newCurr;
         }
-        removeFromClosest(currNode);
         delete currNode;
 
         if(newCurr != nullptr)
@@ -358,7 +262,6 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::deleteByKeyAux(Key key, Node* root, boo
         currNode->m_key = closest->m_key;
         currNode->m_data = closest->m_data;
         if(hasDataChanged) *hasDataChanged = true;
-        removeFromClosest(closest);
         delete closest;
         return currNode;
     }
@@ -613,7 +516,6 @@ template<class Key, class Value>
 void AVLTree<Key,Value>::createTreeFromArray(TreeNode<Key,Value>* arr[], int size) {
 
     m_root = arrayToTreeAux(arr, 0, size - 1);
-    m_topNode = arr[size-1];
     if(size == 1) return;
     for(int i=0;i<size;i++)
     {
