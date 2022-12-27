@@ -4,7 +4,8 @@
 
 #include "HashTable.h"
 
-HashNode::HashNode() :player(nullptr), playerKey(-1), chainNext(nullptr){}
+
+HashNode::HashNode() :m_player(nullptr),m_playerKey(-1), chainNext(nullptr), uniNode(nullptr){}
 
 
 HashTable::HashTable() : m_size(HashTable::MIN_SIZE), m_currSize(0) {
@@ -22,8 +23,7 @@ HashTable::~HashTable(){
         while(nodeToDelete != nullptr)
         {
             temp = nodeToDelete->chainNext;
-            // TODO: Call UnionNode Delete here and check if team is out of
-            // TODO: the game to delete it too, delete Player inside of UnionNode
+//            delete nodeToDelete->uniNode;
             delete nodeToDelete;
             nodeToDelete = temp;
         }
@@ -37,34 +37,56 @@ int HashTable::hash(int key, int mod){
     return key%mod;
 }
 
+void HashTable::createUnionNode(HashNode* newHashNode, Player* player, Team* team)
+{
+    UnionNode* newUniNode = new UnionNode();
+    newHashNode->uniNode = newUniNode;
+    // check if team has no players
+    if(team->getPlayersCount() == 0)
+    {
+        newUniNode->m_team=team;
+        team->setRootUnionNode(newUniNode);
+        // TODO:Update permutation/gamesPlayed REQUIRED
+    }
+    else{
+        UnionNode* rootUniNode = team->getRootUnionNode();
+        newUniNode->m_parent=rootUniNode;
+        // TODO:Update permutation/gamesPlayed REQUIRED
 
-void HashTable::insert(int id, Player* player) {
+    }
+
+}
+
+HashNode* HashTable::insert(Player* player, Team* team) {
+    int id = player->getId();
     if(shouldExpand())
         increaseArraySize();
     int index = hash(id, m_size);
     HashNode* currNode = m_table[index];
+
     // Starting a "new chain"
-    if(currNode->playerKey == -1)
+    if(currNode->m_playerKey == -1)
     {
-        currNode->playerKey = id;
-        currNode->player = player;
-        // TODO: add union node
+        currNode->m_playerKey = id;
+        currNode->m_player = player;
+        createUnionNode(currNode, player, team);
     }
     else
     {
         // Adding to an existing chain
         while(currNode->chainNext != nullptr)
         {
-            if(currNode->playerKey == id)
+            if(currNode->m_playerKey == id)
                 throw FailureError();
             currNode = currNode->chainNext;
         }
         currNode->chainNext = new HashNode();
-        currNode->chainNext->player = player;
-        currNode->chainNext->playerKey = id;
-        // TODO: add to union find
+        currNode->chainNext->m_player = player;
+        currNode->chainNext->m_playerKey = id;
+        createUnionNode(currNode, player, team);
     }
     m_currSize++;
+    return currNode;
 }
 
 void HashTable::initTable(HashNode** newTable, int size)
@@ -74,12 +96,12 @@ void HashTable::initTable(HashNode** newTable, int size)
         newTable[i] = new HashNode();
     }
 }
-void HashTable::insertToNewTable(HashNode* newNode, HashNode** newTable)
+void HashTable::insertToNewTable(HashNode* newNode, HashNode** newTable) const
 {
     int newIndex;
-    newIndex = hash(newNode->playerKey, m_size*2);
+    newIndex = hash(newNode->m_playerKey, m_size*2);
     HashNode* currNode = newTable[newIndex];
-    if(currNode->playerKey == -1)
+    if(currNode->m_playerKey == -1)
     {
         newTable[newIndex] = newNode;
         return;
@@ -96,7 +118,7 @@ HashNode* HashTable::find(int id) {
     HashNode* currNode = m_table[index];
     while(currNode != nullptr)
     {
-        if(currNode->playerKey == id)
+        if(currNode->m_playerKey == id)
             return currNode;
         currNode = currNode->chainNext;
     }
@@ -111,7 +133,7 @@ void HashTable::increaseArraySize() {
     for(int i=0;i<m_size;i++)
     {
         currNode = m_table[i];
-        while(currNode != nullptr && currNode->playerKey != -1)
+        while(currNode != nullptr && currNode->m_playerKey != -1)
         {
             temp = currNode->chainNext;
             currNode->chainNext = nullptr;
@@ -133,8 +155,8 @@ void HashTable::printTable()
         currNode = m_table[i];
         while(currNode != nullptr)
         {
-            if(currNode->playerKey != -1)
-                std::cout << currNode->playerKey << "-->";
+            if(currNode->m_playerKey != -1)
+                std::cout << currNode->m_playerKey << "-->";
             currNode = currNode->chainNext;
         }
         std::cout << "" << std::endl;

@@ -8,7 +8,6 @@
 #include <vector>
 #include "catch.hpp"
 #include <stdlib.h>
-#include "../../DataStruct/DataEx1/worldcup23a1.h"
 
 using namespace std;
 

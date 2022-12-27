@@ -1,23 +1,18 @@
 #include "UnionFind.h"
 
-UnionFind::UnionNode::UnionNode():
-    m_parent(nullptr),
-    m_team(nullptr),
-    m_totalPermutation(permutation_t::neutral()),
-    m_gamesPlayed(0),
-    m_playersNum(0),
-    m_extraPermutation(permutation_t::neutral()),
-    m_extraGamesPlayed(0)
+
+
+
+UnionFind::UnionFind() : m_hashTable(new HashTable())
 {}
 
-UnionFind::UnionFind() : m_hashTable(std::hash_map<int,Player>())
-{}
-std::hash_map<int, Player> UnionFind::getTable() {
+
+HashTable* UnionFind::getTable() {
     return m_hashTable;
 }
 
-int UnionFind::Find(int id) { //update during shrink
-    UnionNode *uf = m_hashTable.find(id);
+Team* UnionFind::find(int id) { //update during shrink
+    UnionNode *uf = m_hashTable->find(id)->uniNode;
     UnionNode *temp = uf;
     UnionNode *root=nullptr;
     if (uf) {
@@ -31,16 +26,27 @@ int UnionFind::Find(int id) { //update during shrink
             uf->m_parent = root;
             uf = temp;
         }
+        return root->m_team;
     }
-    return root;
-
+    return nullptr;
 }
-UnionFind UnionFind::Union(int p, int q) {
-    UnionNode* node1 = Find(p);
-    UnionNode* node2 = Find(q);
+void UnionFind::unite(int p, int q) {
+    UnionNode* node1 = m_hashTable->find(p)->uniNode;
+    UnionNode* node2 = m_hashTable->find(q)->uniNode;
 
     if(node1 && node2){
         node1->m_playersNum > node2->m_playersNum ?
         node2->m_parent = node1 : node1->m_parent = node2;
+    }
+}
+
+void UnionFind::insertPlayer(Player *player, Team *team) {
+    HashNode* hashNode;
+    try{
+        hashNode = m_hashTable->insert(player, team);
+    }
+    catch(FailureError &e)
+    {
+        throw FailureError();
     }
 }

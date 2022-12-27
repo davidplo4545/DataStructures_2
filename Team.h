@@ -8,16 +8,17 @@
 #include "wet2util.h"
 #include "Player.h"
 #include "Exception.h"
-
+#include "UnionNode.h"
+struct UnionNode;
 class Player;
 class Team {
-    static const int MIN_VALID_SIZE = 11;
     int m_id, m_points;
     int m_playersNum;
     int m_strength; // points + sum of (goals - cards) of each player
     int m_gamesPlayed = 0;
     int m_goalKeepersNum;
     bool m_isInSystem;
+    UnionNode* m_rootUniNode;
 
     friend bool operator>(const Team& p1, const Team& p2);
     friend bool operator==(const Team& p1, const Team& p2);
@@ -31,6 +32,9 @@ public:
     ~Team();
     Team& operator=(const Team& team);
     Team(const Team& team);
+
+    UnionNode* getRootUnionNode();
+    void setRootUnionNode(UnionNode* uniNode);
 
     bool isInSystem() const;
     void setIsInSystem(bool isRanked);

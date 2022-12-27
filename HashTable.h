@@ -4,19 +4,19 @@
 
 #ifndef DATASTRUCT2_HASHTABLE_H
 #define DATASTRUCT2_HASHTABLE_H
-#include "UnionFind.h"
 #include "Player.h"
+#include "Team.h"
 #include "Exception.h"
+#include "wet2util.h"
+#include "UnionNode.h"
+
 struct HashNode{
-
-    Player* player;
-
-    int playerKey;
+    Player* m_player;
+    int m_playerKey;
     HashNode* chainNext;
-    // UnionNode* node;
+    UnionNode* uniNode;
     HashNode();
 };
-
 
 class HashTable {
     const int MIN_SIZE = 13;
@@ -29,16 +29,17 @@ class HashTable {
     bool shouldExpand() const;
 
     void increaseArraySize();
-    void insertToNewTable(HashNode* newNode, HashNode** newTable);
+    void insertToNewTable(HashNode* newNode, HashNode** newTable) const;
+    void createUnionNode(HashNode* newHashNode, Player* player, Team* team);
 
-    int hash(int key, int mod);
+    static int hash(int key, int mod);
 public:
     HashTable();
     ~HashTable();
 
     static void initTable(HashNode** newTable, int size);
 
-    void insert(int id, Player *player);
+    HashNode* insert(Player *player, Team* team);
     void printTable();
     HashNode* find(int key);
 };

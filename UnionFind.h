@@ -1,31 +1,25 @@
 #ifndef DATASTRUCT2_UNIONFIND_H
 #define DATASTRUCT2_UNIONFIND_H
-#include <hash_map>
+//#include <hash_map>
 #include "wet2util.h"
 #include "Team.h"
 #include "Player.h"
+#include "HashTable.h"
+#include "UnionNode.h"
+
+
 
 class UnionFind {
-//////////////////////////////////////////////////
 private:
-    std::hash_map<int,Player> m_hashTable; //hashtable
-    struct UnionNode{
-        UnionNode* m_parent;
-        Team* m_team;
-        permutation_t m_totalPermutation;
-        int m_gamesPlayed;
-        int m_playersNum;
-        permutation_t m_extraPermutation;
-        int m_extraGamesPlayed;
-        UnionNode() //done
-    };
-//////////////////////////////////////////////////
+    HashTable* m_hashTable; //hashtable
+
 public:
     UnionFind(); //done
-    std::hash_map<int, Player> getTable(); //done
-    int Find(int id); //not finished
-    UnionFind Union(int p, int q); //not finished
+    HashTable* getTable(); //done
+    Team* find(int id); //not finished
+    void unite(int p, int q); //not finished
     int getGamesPlayedNum(int id);
+    void insertPlayer(Player* player, Team* team);
 
 
 

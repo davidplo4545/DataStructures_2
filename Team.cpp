@@ -3,7 +3,7 @@
 //
 
 #include "Team.h"
-Team::Team(int id, int points):m_id(id),m_points(points), m_playersNum(0), m_strength(points),m_gamesPlayed(0),m_goalKeepersNum(0), m_isInSystem(true)
+Team::Team(int id, int points):m_id(id),m_points(points), m_playersNum(0), m_strength(points),m_gamesPlayed(0),m_goalKeepersNum(0), m_isInSystem(true), m_rootUniNode(nullptr)
 {
 
     if(id <= 0 || points <0)
@@ -63,8 +63,13 @@ std::ostream& operator<<(std::ostream& os, const Team& team)
 }
 
 
-bool Team::isAbleToPlay() const { return m_playersNum >= MIN_VALID_SIZE && m_goalKeepersNum > 0;}
+bool Team::isAbleToPlay() const { return m_goalKeepersNum > 0;}
 int Team::getPoints() const { return m_points;}
+
+UnionNode* Team::getRootUnionNode() { return m_rootUniNode;}
+void Team::setRootUnionNode(UnionNode *uniNode) {
+    m_rootUniNode = uniNode;
+}
 void Team::updatePointsAfterGame(int value) {
     m_points += value;
     m_strength += value;

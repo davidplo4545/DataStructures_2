@@ -5,14 +5,14 @@
 using std::rand;
 int main() {
     HashTable hs = HashTable();
+    auto team = new Team(5,5);
     for(int i=100;i<200;i++)
     {
-
         try{
             auto pl = new Player(rand()%100000,5,0,0,0, false);
-            hs.insert(pl->getId(),pl);
+            hs.insert(pl,team);
             HashNode* tempNode = hs.find(pl->getId());
-            std::cout << "Found player:" << tempNode->player << std::endl;
+            std::cout << "Found player:" << tempNode->m_player << std::endl;
         }
         catch(FailureError &e)
         {
