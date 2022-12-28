@@ -105,9 +105,6 @@ void AVLTree<Key,Value>::insertAux(Key key, Node* newNode, Node* currNode)
             currNode->m_leftSon = newNode;
 
             newNode->m_parent=currNode;
-            updateClosestNode(newNode, currNode, true);
-
-
             goBackAndFixTree(currNode);
 
         }
@@ -124,7 +121,6 @@ void AVLTree<Key,Value>::insertAux(Key key, Node* newNode, Node* currNode)
             // adding a new node to the right of the current node
             currNode->m_rightSon = newNode;
             newNode->m_parent = currNode;
-            updateClosestNode(newNode, currNode, false);
             goBackAndFixTree(currNode);
         }
     }

@@ -16,13 +16,18 @@
 #define WORLDCUP23A2_H_
 
 #include "wet2util.h"
-
+#include "UnionFind.h"
+#include "HashTable.h"
+#include "Player.h"
+#include "Team.h"
+#include "AVLTree.h"
 class world_cup_t {
 private:
-	//
-	// Here you may add anything you want
-	//
-	
+    AVLTree<int, Team*>* m_idTeamsTree;
+    AVLTree<Team, Team*>* m_abilityTeamsTree; // Sorted by total team's ability
+    UnionFind* m_playersUF;
+    int m_teamsNum;
+    int m_playersNum;
 public:
 	// <DO-NOT-MODIFY> {
 	

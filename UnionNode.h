@@ -16,7 +16,6 @@ struct UnionNode{
     Team* m_team;
     permutation_t m_totalPermutation;
     int m_gamesPlayed;
-    int m_playersNum;
     permutation_t m_extraPermutation;
     int m_extraGamesPlayed;
     UnionNode();

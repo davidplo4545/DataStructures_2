@@ -23,7 +23,7 @@ HashTable::~HashTable(){
         while(nodeToDelete != nullptr)
         {
             temp = nodeToDelete->chainNext;
-//            delete nodeToDelete->uniNode;
+            delete nodeToDelete->uniNode;
             delete nodeToDelete;
             nodeToDelete = temp;
         }
@@ -37,25 +37,7 @@ int HashTable::hash(int key, int mod){
     return key%mod;
 }
 
-void HashTable::createUnionNode(HashNode* newHashNode, Player* player, Team* team)
-{
-    UnionNode* newUniNode = new UnionNode();
-    newHashNode->uniNode = newUniNode;
-    // check if team has no players
-    if(team->getPlayersCount() == 0)
-    {
-        newUniNode->m_team=team;
-        team->setRootUnionNode(newUniNode);
-        // TODO:Update permutation/gamesPlayed REQUIRED
-    }
-    else{
-        UnionNode* rootUniNode = team->getRootUnionNode();
-        newUniNode->m_parent=rootUniNode;
-        // TODO:Update permutation/gamesPlayed REQUIRED
 
-    }
-
-}
 
 HashNode* HashTable::insert(Player* player, Team* team) {
     int id = player->getId();
@@ -69,23 +51,26 @@ HashNode* HashTable::insert(Player* player, Team* team) {
     {
         currNode->m_playerKey = id;
         currNode->m_player = player;
-        createUnionNode(currNode, player, team);
+        m_currSize++;
     }
     else
     {
+        HashNode* prev = currNode;
         // Adding to an existing chain
-        while(currNode->chainNext != nullptr)
+        while(currNode != nullptr)
         {
             if(currNode->m_playerKey == id)
                 throw FailureError();
+            prev = currNode;
             currNode = currNode->chainNext;
         }
-        currNode->chainNext = new HashNode();
-        currNode->chainNext->m_player = player;
-        currNode->chainNext->m_playerKey = id;
-        createUnionNode(currNode, player, team);
+        prev->chainNext = new HashNode();
+        prev->chainNext->m_player = player;
+        prev->chainNext->m_playerKey = id;
+        m_currSize++;
+
+        return prev->chainNext;
     }
-    m_currSize++;
     return currNode;
 }
 
@@ -164,10 +149,6 @@ void HashTable::printTable()
     }
 }
 
-
-
-
-
-
+int HashTable::getSize() const { return m_size;}
 
 

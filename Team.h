@@ -13,8 +13,9 @@ struct UnionNode;
 class Player;
 class Team {
     int m_id, m_points;
+    permutation_t m_teamSpirit;
     int m_playersNum;
-    int m_strength; // points + sum of (goals - cards) of each player
+    int m_totalAbility;
     int m_gamesPlayed = 0;
     int m_goalKeepersNum;
     bool m_isInSystem;
@@ -27,31 +28,29 @@ class Team {
 
 
 public:
-    Team(int id, int points);
+    Team(int id);
     Team() = default;
     ~Team();
-    Team& operator=(const Team& team);
+
     Team(const Team& team);
 
     UnionNode* getRootUnionNode();
     void setRootUnionNode(UnionNode* uniNode);
-
+    void increasePlayerCount();
     bool isInSystem() const;
-    void setIsInSystem(bool isRanked);
+    void changeSystemState();
     int getId() const;
     int getPoints() const;
     void updatePointsAfterGame(int value);
     int getStrength() const;
     void updateStatsFromTeams(Team* t1, Team* t2);
-    void updateStrength(int goals, int cards);
+    void raiseAbility(int ability);
 
     int getPlayersCount() const;
     bool isAbleToPlay() const;
     int getGamesPlayed() const;
 
     Team* playMatch(Team *rival);
-
-    void printTeamPlayers() const;
 
 };
 

@@ -22,7 +22,6 @@ class HashTable {
     const int MIN_SIZE = 13;
     const int LOAD_FACTOR = 2;
 
-    HashNode** m_table;
     int m_size;
     int m_currSize;
 
@@ -34,6 +33,8 @@ class HashTable {
 
     static int hash(int key, int mod);
 public:
+    HashNode** m_table;
+
     HashTable();
     ~HashTable();
 
@@ -41,6 +42,7 @@ public:
 
     HashNode* insert(Player *player, Team* team);
     void printTable();
+    int getSize() const;
     HashNode* find(int key);
 };
 

@@ -8,22 +8,28 @@
 #include "UnionNode.h"
 
 
-
+struct TestNode
+{
+    Team* team;
+    TestNode* next;
+};
 class UnionFind {
 private:
-    HashTable* m_hashTable; //hashtable
+    HashTable* m_hashTable;
 
+    TestNode* testingChain; // list made for testing purposes
+    TestNode* lastNode;
 public:
     UnionFind(); //done
     HashTable* getTable(); //done
     Team* find(int id); //not finished
     void unite(int p, int q); //not finished
-    int getGamesPlayedNum(int id);
+    int calculateGamesPlayed(Player* player);
+
+    void createUnionNode(HashNode* newHashNode, Player* player, Team* team);
     void insertPlayer(Player* player, Team* team);
 
-
-
-
+    void print();
 
 };
 

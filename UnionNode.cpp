@@ -9,16 +9,13 @@ UnionNode::UnionNode():
         m_team(nullptr),
         m_totalPermutation(permutation_t::neutral()),
         m_gamesPlayed(0),
-        m_playersNum(0),
         m_extraPermutation(permutation_t::neutral()),
         m_extraGamesPlayed(0)
 {}
 
 UnionNode::~UnionNode() {
-    if(m_team != nullptr && !m_team->isInSystem())
-    {
+    if(m_team != nullptr)
         delete m_team;
-    }
     delete m_player;
 
 }
