@@ -4,6 +4,8 @@
 #include <iostream>
 #include "../HashTable.h"
 #include "../Player.h"
+#include "../wet2util.h"
+#include "../worldcup23a2.h"
 #include <sstream>
 #include <vector>
 #include "catch.hpp"
@@ -39,15 +41,9 @@ TEST_CASE("Hash Table Tests")
 {
     SECTION("simple player insert")
     {
-        HashTable hs = HashTable();
-        for(int i=100;i<130;i++)
-        {
-            Player* pl = new Player(i,5,0,0,0,false);
-            hs.insert(i,pl);
-        }
-        hs.printTable();
-//        StatusType res = obj->add_team(1, 2);
-//        REQUIRE(res == StatusType::SUCCESS);
-//        delete obj;
+        world_cup_t *obj = new world_cup_t();
+        StatusType res = obj->add_team(1);
+        REQUIRE(res == StatusType::SUCCESS);
+        delete obj;
     }
 }

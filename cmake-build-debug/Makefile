@@ -152,6 +152,30 @@ HashTable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/HashTable.cpp.s
 .PHONY : HashTable.cpp.s
 
+MyTests.obj: MyTests.cpp.obj
+.PHONY : MyTests.obj
+
+# target to build an object file
+MyTests.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/MyTests.cpp.obj
+.PHONY : MyTests.cpp.obj
+
+MyTests.i: MyTests.cpp.i
+.PHONY : MyTests.i
+
+# target to preprocess a source file
+MyTests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/MyTests.cpp.i
+.PHONY : MyTests.cpp.i
+
+MyTests.s: MyTests.cpp.s
+.PHONY : MyTests.s
+
+# target to generate assembly for a file
+MyTests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/MyTests.cpp.s
+.PHONY : MyTests.cpp.s
+
 Player.obj: Player.cpp.obj
 .PHONY : Player.obj
 
@@ -199,6 +223,30 @@ Team.s: Team.cpp.s
 Team.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Team.cpp.s
 .PHONY : Team.cpp.s
+
+TestMain.obj: TestMain.cpp.obj
+.PHONY : TestMain.obj
+
+# target to build an object file
+TestMain.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/TestMain.cpp.obj
+.PHONY : TestMain.cpp.obj
+
+TestMain.i: TestMain.cpp.i
+.PHONY : TestMain.i
+
+# target to preprocess a source file
+TestMain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/TestMain.cpp.i
+.PHONY : TestMain.cpp.i
+
+TestMain.s: TestMain.cpp.s
+.PHONY : TestMain.s
+
+# target to generate assembly for a file
+TestMain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/TestMain.cpp.s
+.PHONY : TestMain.cpp.s
 
 UnionFind.obj: UnionFind.cpp.obj
 .PHONY : UnionFind.obj
@@ -248,29 +296,29 @@ UnionNode.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/UnionNode.cpp.s
 .PHONY : UnionNode.cpp.s
 
-main.obj: main.cpp.obj
-.PHONY : main.obj
+worldcup23a2.obj: worldcup23a2.cpp.obj
+.PHONY : worldcup23a2.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+worldcup23a2.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.obj
+.PHONY : worldcup23a2.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+worldcup23a2.i: worldcup23a2.cpp.i
+.PHONY : worldcup23a2.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/main.cpp.i
-.PHONY : main.cpp.i
+worldcup23a2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.i
+.PHONY : worldcup23a2.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+worldcup23a2.s: worldcup23a2.cpp.s
+.PHONY : worldcup23a2.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/main.cpp.s
-.PHONY : main.cpp.s
+worldcup23a2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.s
+.PHONY : worldcup23a2.cpp.s
 
 # Help Target
 help:
@@ -284,21 +332,27 @@ help:
 	@echo ... HashTable.obj
 	@echo ... HashTable.i
 	@echo ... HashTable.s
+	@echo ... MyTests.obj
+	@echo ... MyTests.i
+	@echo ... MyTests.s
 	@echo ... Player.obj
 	@echo ... Player.i
 	@echo ... Player.s
 	@echo ... Team.obj
 	@echo ... Team.i
 	@echo ... Team.s
+	@echo ... TestMain.obj
+	@echo ... TestMain.i
+	@echo ... TestMain.s
 	@echo ... UnionFind.obj
 	@echo ... UnionFind.i
 	@echo ... UnionFind.s
 	@echo ... UnionNode.obj
 	@echo ... UnionNode.i
 	@echo ... UnionNode.s
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... worldcup23a2.obj
+	@echo ... worldcup23a2.i
+	@echo ... worldcup23a2.s
 .PHONY : help
 
 

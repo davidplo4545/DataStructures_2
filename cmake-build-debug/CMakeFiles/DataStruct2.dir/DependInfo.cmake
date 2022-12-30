@@ -9,11 +9,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/david/Desktop/DataStructures_2/HashTable.cpp" "CMakeFiles/DataStruct2.dir/HashTable.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/HashTable.cpp.obj.d"
+  "C:/Users/david/Desktop/DataStructures_2/MyTests.cpp" "CMakeFiles/DataStruct2.dir/MyTests.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/MyTests.cpp.obj.d"
   "C:/Users/david/Desktop/DataStructures_2/Player.cpp" "CMakeFiles/DataStruct2.dir/Player.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/Player.cpp.obj.d"
   "C:/Users/david/Desktop/DataStructures_2/Team.cpp" "CMakeFiles/DataStruct2.dir/Team.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/Team.cpp.obj.d"
+  "C:/Users/david/Desktop/DataStructures_2/TestMain.cpp" "CMakeFiles/DataStruct2.dir/TestMain.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/TestMain.cpp.obj.d"
   "C:/Users/david/Desktop/DataStructures_2/UnionFind.cpp" "CMakeFiles/DataStruct2.dir/UnionFind.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/UnionFind.cpp.obj.d"
   "C:/Users/david/Desktop/DataStructures_2/UnionNode.cpp" "CMakeFiles/DataStruct2.dir/UnionNode.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/UnionNode.cpp.obj.d"
-  "C:/Users/david/Desktop/DataStructures_2/main.cpp" "CMakeFiles/DataStruct2.dir/main.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/main.cpp.obj.d"
+  "C:/Users/david/Desktop/DataStructures_2/worldcup23a2.cpp" "CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.obj" "gcc" "CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.obj.d"
   )
 
 # Targets to which this target links.

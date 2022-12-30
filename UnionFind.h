@@ -22,10 +22,10 @@ private:
 public:
     UnionFind(); //done
     HashTable* getTable(); //done
-    Team* find(int id); //not finished
+    UnionNode* find(int id); //not finished
     void unite(int p, int q); //not finished
-    int calculateGamesPlayed(Player* player);
-
+    int calculateGamesPlayed(int id);
+    void buyTeam(Team* buyer, Team* bought);
     void createUnionNode(HashNode* newHashNode, Player* player, Team* team);
     void insertPlayer(Player* player, Team* team);
 

@@ -36,21 +36,24 @@ public:
 
     UnionNode* getRootUnionNode();
     void setRootUnionNode(UnionNode* uniNode);
-    void increasePlayerCount();
+    void increasePlayerCount(int num=1);
     bool isInSystem() const;
     void changeSystemState();
     int getId() const;
-    int getPoints() const;
     void updatePointsAfterGame(int value);
-    int getStrength() const;
+    void updateTeamSpirit(permutation_t playerSpirit);
+    void increaseGoalKeepers(int num);
     void updateStatsFromTeams(Team* t1, Team* t2);
     void raiseAbility(int ability);
 
+    int getStrength() const;
+    int getPoints() const;
     int getPlayersCount() const;
     bool isAbleToPlay() const;
     int getGamesPlayed() const;
+    int getGoalKeepers() const;
 
-    Team* playMatch(Team *rival);
+    int playMatch(Team *rival);
 
 };
 

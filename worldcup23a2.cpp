@@ -38,7 +38,7 @@ StatusType world_cup_t::add_team(int teamId)
 StatusType world_cup_t::remove_team(int teamId)
 {
     if(teamId <= 0) return StatusType::INVALID_INPUT;
-    Team* team = nullptr;
+    Team* team;
 
     TreeNode<int,Team*>* teamNodeToDelete = m_idTeamsTree->find(teamId);
     if(teamNodeToDelete == nullptr)
@@ -51,6 +51,10 @@ StatusType world_cup_t::remove_team(int teamId)
         team->changeSystemState();
         m_idTeamsTree->deleteByKey(teamId);
         m_abilityTeamsTree->deleteByKey(*team);
+        if(team->getPlayersCount() == 0)
+        {
+            delete team;
+        }
     }
 	return StatusType::SUCCESS;
 }
@@ -59,32 +63,81 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
                                    const permutation_t &spirit, int gamesPlayed,
                                    int ability, int cards, bool goalKeeper)
 {
-    // TODO: CHECK INVALID INPUT
+    if(playerId <=0 || teamId <=0 || !(spirit.isvalid()) || gamesPlayed < 0 || cards < 0)
+        return StatusType::INVALID_INPUT;
 
-    //TODO: Check if team exists
+    // Check if team exists
+    TreeNode<int, Team*>* teamNode = m_idTeamsTree->find(teamId);
+    if(teamNode == nullptr)
+        return StatusType::FAILURE;
 
-    //TODO: Insert player and check if it exists
+    Team* team = teamNode->m_data;
+    Player* player = new Player(playerId, spirit, gamesPlayed, ability, cards, goalKeeper);
+    // Check if player exists
+    try{
+        m_playersUF->insertPlayer(player, teamNode->m_data);
+    }
+    catch(FailureError &e)
+    {
+        return StatusType::FAILURE;
+    }
+    // Remove team from the ability sorted tree and
+    // insert it again to its new location
+    team->raiseAbility(ability);
+    m_abilityTeamsTree->deleteByKey(*team);
+    m_abilityTeamsTree->insert(*team, team);
 
-    //TODO: Update team/player stats: gamesPlayed/teamSpirit
-	// TODO: Your code goes here
+    team->updateTeamSpirit(spirit);
+
 	return StatusType::SUCCESS;
 }
 
 output_t<int> world_cup_t::play_match(int teamId1, int teamId2)
 {
-	// TODO: Your code goes here
-	return StatusType::SUCCESS;
+    if(teamId1 <= 0 || teamId2 <= 0 || teamId1 == teamId2)
+        return StatusType::INVALID_INPUT;
+    TreeNode<int, Team*>*  teamNode1= m_idTeamsTree->find(teamId1);
+    TreeNode<int, Team*>*  teamNode2= m_idTeamsTree->find(teamId2);
+    if(!teamNode1 || !teamNode2) return StatusType::FAILURE;
+    Team* team1 = teamNode1->m_data;
+    Team* team2 = teamNode2->m_data;
+    if(!team1->isAbleToPlay() || !team2->isAbleToPlay()) return StatusType::FAILURE;
+
+    int result = team1->playMatch(team2);
+
+	return output_t<int>(result);
 }
 
 output_t<int> world_cup_t::num_played_games_for_player(int playerId)
 {
-	// TODO: Your code goes here
-	return 22;
+    if(playerId <=0) return output_t<int>(StatusType::INVALID_INPUT);
+
+    int gamesPlayed;
+    try{
+        gamesPlayed = m_playersUF->calculateGamesPlayed(playerId);
+    }
+    catch(FailureError &e)
+    {
+        return output_t<int>(StatusType::FAILURE);
+    }
+
+	return output_t<int>(gamesPlayed);
 }
 
 StatusType world_cup_t::add_player_cards(int playerId, int cards)
 {
-	// TODO: Your code goes here
+	if(playerId <=0 || cards <=0) return StatusType::INVALID_INPUT;
+
+    // Check if players exists/ team is still in system
+    UnionNode* teamUniNode = m_playersUF->find(playerId);
+    if(teamUniNode == nullptr || !(teamUniNode->m_team->isInSystem())) return StatusType::FAILURE;
+
+    HashTable* table = m_playersUF->getTable();
+    HashNode * hs = table->find(playerId);
+
+    Player* pl = hs->m_player;
+    pl->addCards(cards);
+
 	return StatusType::SUCCESS;
 }
 
@@ -101,14 +154,13 @@ output_t<int> world_cup_t::get_team_points(int teamId)
 {
     if(teamId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
     TreeNode<int,Team*>* teamNode = m_idTeamsTree->find(teamId);
-    Team* team = nullptr;
     if(teamNode == nullptr)
     {
         return StatusType::FAILURE;
     }
     else
     {
-        team = teamNode->m_data;
+        Team* team = teamNode->m_data;
         return output_t<int>(team->getPoints());
     }
 }

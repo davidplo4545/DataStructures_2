@@ -35,6 +35,10 @@ bool Player::isGoalKeeper() const {
     return m_isGoalKeeper;
 }
 
+void Player::addCards(int num) {
+    m_cardsReceived += num;
+}
+
 void Player::updateGamesPlayedByFactor(int factor) {
     m_gamesPlayed -= factor;
 }

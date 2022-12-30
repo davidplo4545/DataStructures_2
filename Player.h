@@ -28,6 +28,7 @@ public:
     int getGamesPlayed() const;
     int getAbility() const;
     int getCards() const;
+    void addCards(int num);
 
     bool isGoalKeeper() const;
 };

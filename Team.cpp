@@ -15,34 +15,43 @@ void Team::changeSystemState() {
 
 int Team::getId() const { return m_id;}
 
-void Team::increasePlayerCount() { m_playersNum +=1;}
+void Team::increasePlayerCount(int num) { m_playersNum +=num;}
 Team::~Team() {
 }
-Team* Team::playMatch(Team* rival) {
+
+void Team::updateTeamSpirit(permutation_t playerSpirit) {
+//    m_teamSpirit
+}
+int Team::playMatch(Team* rival) {
+
+    m_gamesPlayed +=1;
+    rival->m_gamesPlayed +=1;
     if(this->getStrength() > rival->getStrength())
     {
         this->updatePointsAfterGame(3);
-        return this;
+        return 1;
     }
     else if (this->getStrength() < rival->getStrength())
     {
         rival->updatePointsAfterGame(3);
-        return rival;
+        return 3;
     }
-    return this; // TEMPORARY LINE
-    //TODO: Add spirit checking if strength is equal
-//    else{
-//        if(m_id > rival->getId())
-//        {
-//            this->updatePointsAfterGame(3);
-//            return this;
-//        }
-//        else
-//        {
-//            rival->updatePointsAfterGame(3);
-//            return rival;
-//        }
-//    }
+
+    if(m_teamSpirit.strength() > rival->m_teamSpirit.strength())
+    {
+        this->updatePointsAfterGame(3);
+        return 2;
+    }
+    else if(m_teamSpirit.strength() > rival->m_teamSpirit.strength())
+    {
+        rival->updatePointsAfterGame(3);
+        return 4;
+    }
+
+    // ITS A TIE
+    this->updatePointsAfterGame(1);
+    rival->updatePointsAfterGame(1);
+    return 0;
 }
 
 Team::Team(const Team& team)
@@ -73,6 +82,10 @@ void Team::updatePointsAfterGame(int value) {
     m_points += value;
 }
 
+void Team::increaseGoalKeepers(int num) {
+    m_goalKeepersNum += num;
+}
+
 void Team::updateStatsFromTeams(Team *t1, Team *t2) {
 //    m_strength = t1->m_strength + t2->m_strength;
 //    m_points = t1->m_points + t2->m_points;
@@ -85,6 +98,9 @@ int Team::getPlayersCount() const {
     return m_playersNum;
 }
 
+int Team::getGoalKeepers() const {
+    return m_goalKeepersNum;
+}
 
 int Team::getGamesPlayed() const {
     return m_gamesPlayed;

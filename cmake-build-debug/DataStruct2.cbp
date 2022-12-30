@@ -94,6 +94,9 @@
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/HashTable.h">
 			<Option target="DataStruct2"/>
 		</Unit>
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/MyTests.cpp">
+			<Option target="DataStruct2"/>
+		</Unit>
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/Player.cpp">
 			<Option target="DataStruct2"/>
 		</Unit>
@@ -104,6 +107,12 @@
 			<Option target="DataStruct2"/>
 		</Unit>
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/Team.h">
+			<Option target="DataStruct2"/>
+		</Unit>
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/TestMain.cpp">
+			<Option target="DataStruct2"/>
+		</Unit>
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/TestUtils.h">
 			<Option target="DataStruct2"/>
 		</Unit>
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/UnionFind.cpp">
@@ -118,7 +127,10 @@
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/UnionNode.h">
 			<Option target="DataStruct2"/>
 		</Unit>
-		<Unit filename="C:/Users/david/Desktop/DataStructures_2/main.cpp">
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/worldcup23a2.cpp">
+			<Option target="DataStruct2"/>
+		</Unit>
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/worldcup23a2.h">
 			<Option target="DataStruct2"/>
 		</Unit>
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/CMakeLists.txt">
