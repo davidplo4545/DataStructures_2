@@ -19,8 +19,20 @@ void Team::increasePlayerCount(int num) { m_playersNum +=num;}
 Team::~Team() {
 }
 
+Team::Team(const Team& team)
+{
+    m_totalAbility = team.m_totalAbility;
+    m_id = team.m_id;
+    m_playersNum = 0;
+    m_gamesPlayed = 0;
+    m_goalKeepersNum = 1;
+    m_isInSystem = team.m_isInSystem;
+    m_points = team.m_points;
+    m_rootUniNode = nullptr;
+}
+
 void Team::updateTeamSpirit(permutation_t playerSpirit) {
-//    m_teamSpirit
+    m_teamSpirit = m_teamSpirit * playerSpirit;
 }
 int Team::playMatch(Team* rival) {
 
@@ -28,41 +40,32 @@ int Team::playMatch(Team* rival) {
     rival->m_gamesPlayed +=1;
     if(this->getStrength() > rival->getStrength())
     {
-        this->updatePointsAfterGame(3);
+        this->updatePoints(3);
         return 1;
     }
     else if (this->getStrength() < rival->getStrength())
     {
-        rival->updatePointsAfterGame(3);
+        rival->updatePoints(3);
         return 3;
     }
 
     if(m_teamSpirit.strength() > rival->m_teamSpirit.strength())
     {
-        this->updatePointsAfterGame(3);
+        this->updatePoints(3);
         return 2;
     }
     else if(m_teamSpirit.strength() > rival->m_teamSpirit.strength())
     {
-        rival->updatePointsAfterGame(3);
+        rival->updatePoints(3);
         return 4;
     }
 
     // ITS A TIE
-    this->updatePointsAfterGame(1);
-    rival->updatePointsAfterGame(1);
+    this->updatePoints(1);
+    rival->updatePoints(1);
     return 0;
 }
 
-Team::Team(const Team& team)
-{
-//    m_strength = team.m_strength;
-    m_id = team.m_id;
-    m_playersNum = 0;
-    m_gamesPlayed = 0;
-    m_goalKeepersNum = 1;
-    m_isInSystem = true;
-}
 
 
 std::ostream& operator<<(std::ostream& os, const Team& team)
@@ -73,25 +76,27 @@ std::ostream& operator<<(std::ostream& os, const Team& team)
 
 bool Team::isAbleToPlay() const { return m_goalKeepersNum > 0;}
 int Team::getPoints() const { return m_points;}
+int Team::getTotalAbility() const { return m_totalAbility;}
 
 UnionNode* Team::getRootUnionNode() { return m_rootUniNode;}
 void Team::setRootUnionNode(UnionNode *uniNode) {
     m_rootUniNode = uniNode;
 }
-void Team::updatePointsAfterGame(int value) {
+void Team::updatePoints(int value) {
     m_points += value;
 }
+
+void Team::updateTotalAbility(int value) { m_totalAbility += value;}
 
 void Team::increaseGoalKeepers(int num) {
     m_goalKeepersNum += num;
 }
 
-void Team::updateStatsFromTeams(Team *t1, Team *t2) {
-//    m_strength = t1->m_strength + t2->m_strength;
-//    m_points = t1->m_points + t2->m_points;
-//    m_playersNum = t1->m_playersNum + t2->m_playersNum;
-//    m_goalKeepersNum = t1->m_goalKeepersNum + t2->m_goalKeepersNum;
-//    m_gamesPlayed = 0;
+void Team::updateStatsFromOtherTeam(Team *other) {
+    this->updatePoints(other->getPoints());
+    this->updateTotalAbility(other->getTotalAbility());
+    this->increasePlayerCount(other->getPlayersCount());
+    this->increaseGoalKeepers(other->getGoalKeepers());
 }
 
 int Team::getPlayersCount() const {
@@ -105,6 +110,8 @@ int Team::getGoalKeepers() const {
 int Team::getGamesPlayed() const {
     return m_gamesPlayed;
 }
+
+void Team::setGamesPlayed(int value) { m_gamesPlayed = value;}
 
 // Calculated by points + sum of players ability
 int Team::getStrength() const{

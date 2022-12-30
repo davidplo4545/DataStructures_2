@@ -1,0 +1,14 @@
+add_team: SUCCESS
+add_team: SUCCESS
+add_team: SUCCESS
+remove_team: SUCCESS
+add_player: SUCCESS
+add_player: SUCCESS
+play_match: SUCCESS, 3
+num_played_games_for_player: SUCCESS, 1
+add_player_cards: SUCCESS
+get_player_cards: SUCCESS, 3
+get_team_points: SUCCESS, 0
+Team ID: 1 players are: 1001,2001,
+Team ID: 2 players are: 
+buy_team: SUCCESS

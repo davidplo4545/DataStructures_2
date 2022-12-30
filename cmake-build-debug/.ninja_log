@@ -1,3 +1,16 @@
 # ninja log v5
-0	268	6935887136059797	CMakeFiles/DataStruct2.dir/main.cpp.obj	2becacf8842bbc62
-269	365	6935887137010016	DataStruct2.exe	72a98d0f154ee737
+346	447	6941373187857785	DataStruct2.exe	848f58d96713331f
+3	313	6941300204500105	CMakeFiles/DataStruct2.dir/Team.cpp.obj	da7a00ef47375b8b
+1	128	6941380202201813	build.ninja	a4cbf3febbe09ef0
+9	511	6941165855777737	CMakeFiles/DataStruct2.dir/Player.cpp.obj	ba543a6c40ed5b99
+11	342	6941233341203784	CMakeFiles/DataStruct2.dir/UnionNode.cpp.obj	be3316e0864cd484
+2	346	6941373186887565	CMakeFiles/DataStruct2.dir/MyTests.cpp.obj	46eda84736a55805
+3	333	6941369755719503	CMakeFiles/DataStruct2.dir/TestMain.cpp.obj	429102f752692062
+3	357	6941233341353823	CMakeFiles/DataStruct2.dir/HashTable.cpp.obj	8d66047e40a2edde
+4	277	6941312622043844	CMakeFiles/DataStruct2.dir/UnionFind.cpp.obj	9f32e4b7ccf83846
+3	370	6941368795981980	CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.obj	89f189899d52ecde
+12	14178	6941251445126452	CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.obj	e8e02bf5d4af00d7
+1	145	6941380202201813	build.ninja	a4cbf3febbe09ef0
+5	290	6941380205672607	CMakeFiles/DataStruct2.dir/main23a2.cpp.obj	21f6a982ff7155c0
+3	336	6941380206122705	CMakeFiles/DataStruct2.dir/worldcup23a2.cpp.obj	89f189899d52ecde
+336	432	6941380207062902	DataStruct2.exe	3d7e97d64499174

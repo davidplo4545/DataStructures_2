@@ -40,53 +40,52 @@ UnionNode* UnionFind::find(int id) { //update during shrink
     }
     return nullptr;
 }
-void UnionFind::unite(int buyer, int bought) {
-    UnionNode* buyerNode = find(buyer);
-    UnionNode* boughtNode = find(bought);
+void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
 
-    if(buyerNode && boughtNode){
-        if(buyerNode->m_team->getPlayersCount() > boughtNode->m_team->getPlayersCount())
-        {
-            boughtNode->m_parent = buyerNode;
-            boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
-            buyerNode->m_team->increasePlayerCount(boughtNode->m_team->getPlayersCount());
-            buyerNode->m_team->increaseGoalKeepers(boughtNode->m_team->getGoalKeepers());
-            // TODO: Update Spirit here
-        }
-        else
-        {
-            buyerNode->m_parent = boughtNode;
-            boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
-
-
-            buyerNode->m_team->increasePlayerCount(boughtNode->m_team->getPlayersCount());
-            buyerNode->m_team->increaseGoalKeepers(boughtNode->m_team->getGoalKeepers());
-            boughtNode->m_team = buyerNode->m_team;
-            buyerNode->m_team->setRootUnionNode(boughtNode);
-            // TODO: Update Spirit here
-        }
+    if(buyerNode->m_team->getPlayersCount() >= boughtNode->m_team->getPlayersCount())
+    {
+        boughtNode->m_parent = buyerNode;
+        boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
+        // TODO: Update Spirit here
     }
     else
     {
-        throw FailureError();
+        buyerNode->m_parent = boughtNode;
+        boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
+
+        boughtNode->m_team = buyerNode->m_team;
+        buyerNode->m_team->setRootUnionNode(boughtNode);
+        // TODO: Update Spirit here
     }
 }
+
 
 void UnionFind::buyTeam(Team* buyer, Team* bought)
 {
     UnionNode* uniNodeBuyer = buyer->getRootUnionNode();
     UnionNode* uniNodeBought = bought->getRootUnionNode();
+
     if(uniNodeBought && uniNodeBuyer)
     {
-        Player* pBuyer = uniNodeBuyer->m_player;
-        Player* pBought = uniNodeBought->m_player;
-        unite(pBuyer->getId(), pBought->getId());
+        unite(uniNodeBuyer, uniNodeBought);
     }
     else{
-        // One of the teams is empty (no players)
+        if(uniNodeBuyer == nullptr)
+        {
+            buyer->setRootUnionNode(uniNodeBought);
+            buyer->setGamesPlayed(bought->getGamesPlayed());
+            ///// TESTING PURPOSES
+            lastNode->next = new TestNode();
+            lastNode->next->team = buyer;
+            lastNode=lastNode->next;
+            ////////
+            // TODO: Update spirit (maybe inside unite)
+            if(uniNodeBought != nullptr)
+                uniNodeBought->m_team = buyer;
+        }
         // TODO: THINK WHEN THE TEAMS ARE EMPTY WHAT TO DO
-        std::cout << "One of the teams is empty" << std::endl;
     }
+
 }
 
 void UnionFind::createUnionNode(HashNode* newHashNode, Player* player, Team* team)

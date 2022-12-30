@@ -29,7 +29,6 @@ class HashTable {
 
     void increaseArraySize();
     void insertToNewTable(HashNode* newNode, HashNode** newTable) const;
-    void createUnionNode(HashNode* newHashNode, Player* player, Team* team);
 
     static int hash(int key, int mod);
 public:

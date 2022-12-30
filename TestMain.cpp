@@ -3,11 +3,45 @@
 #include "TestUtils.h"
 
 namespace MyTests{
-    bool simpleTeamInsert();
+//    bool simpleTeamInsert();
+//    bool invalidTeamInsert();
+//    bool failedTeamInsert();
+//
+//    bool simplePlayerInsert();
+//    bool invalidInputPlayerInsert();
+//    bool failedPlayerInsert();
+    bool simpleGamesPlayed();
+    bool simpleGamesPlayedWithGetCards();
+    bool simpleGamesPlayedWithMatches();
+    bool simpleTeamBuysTeam();
+    bool buyTeamAndPlayMatch();
+    bool teamBuysEmptyTeam();
+    bool emptyTeamBuysTeam();
+    bool emptyTeamBuysEmptyTeam();
+    bool teamBuysTeamAndAddPlayers();
+    bool multipleTeamBuys();
 }
 
 std::function<bool()> testsList[] = {
-        MyTests::simpleTeamInsert,
+        MyTests::simpleGamesPlayed,
+        MyTests::simpleGamesPlayedWithGetCards,
+        MyTests::simpleGamesPlayedWithMatches,
+        MyTests::simpleTeamBuysTeam,
+        MyTests::buyTeamAndPlayMatch,
+        MyTests::teamBuysEmptyTeam,
+        MyTests::emptyTeamBuysTeam,
+        MyTests::emptyTeamBuysEmptyTeam,
+        MyTests::teamBuysTeamAndAddPlayers,
+        MyTests::multipleTeamBuys,
+        // Team Tests
+//        MyTests::simpleTeamInsert,
+//        MyTests::invalidTeamInsert,
+//        MyTests::failedTeamInsert,
+//
+//        // Player Tests
+//        MyTests::simplePlayerInsert,
+//        MyTests::invalidInputPlayerInsert,
+//        MyTests::failedPlayerInsert,
 };
 
 const int NUMBER_OF_TESTS = sizeof(testsList)/sizeof(std::function<bool()>);

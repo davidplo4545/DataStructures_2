@@ -23,7 +23,7 @@ public:
     UnionFind(); //done
     HashTable* getTable(); //done
     UnionNode* find(int id); //not finished
-    void unite(int p, int q); //not finished
+    void unite(UnionNode* buyerNode, UnionNode* boughtNode); //not finished
     int calculateGamesPlayed(int id);
     void buyTeam(Team* buyer, Team* bought);
     void createUnionNode(HashNode* newHashNode, Player* player, Team* team);

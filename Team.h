@@ -31,8 +31,8 @@ public:
     Team(int id);
     Team() = default;
     ~Team();
-
     Team(const Team& team);
+
 
     UnionNode* getRootUnionNode();
     void setRootUnionNode(UnionNode* uniNode);
@@ -40,17 +40,23 @@ public:
     bool isInSystem() const;
     void changeSystemState();
     int getId() const;
-    void updatePointsAfterGame(int value);
+    void updatePoints(int value);
+    void updateTotalAbility(int value);
     void updateTeamSpirit(permutation_t playerSpirit);
     void increaseGoalKeepers(int num);
-    void updateStatsFromTeams(Team* t1, Team* t2);
+    void updateStatsFromOtherTeam(Team* other);
+
     void raiseAbility(int ability);
 
     int getStrength() const;
     int getPoints() const;
     int getPlayersCount() const;
     bool isAbleToPlay() const;
+
     int getGamesPlayed() const;
+    void setGamesPlayed(int value);
+
+    int getTotalAbility() const;
     int getGoalKeepers() const;
 
     int playMatch(Team *rival);

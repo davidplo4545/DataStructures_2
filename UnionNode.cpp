@@ -7,7 +7,6 @@ UnionNode::UnionNode():
         m_parent(nullptr),
         m_player(nullptr),
         m_team(nullptr),
-        m_totalPermutation(permutation_t::neutral()),
         m_gamesPlayed(0),
         m_extraPermutation(permutation_t::neutral()),
         m_extraGamesPlayed(0)

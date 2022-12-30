@@ -51,6 +51,7 @@ StatusType world_cup_t::remove_team(int teamId)
         team->changeSystemState();
         m_idTeamsTree->deleteByKey(teamId);
         m_abilityTeamsTree->deleteByKey(*team);
+        m_teamsNum -=1;
         if(team->getPlayersCount() == 0)
         {
             delete team;
@@ -83,10 +84,10 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
     }
     // Remove team from the ability sorted tree and
     // insert it again to its new location
-    team->raiseAbility(ability);
     m_abilityTeamsTree->deleteByKey(*team);
+    team->raiseAbility(ability);
     m_abilityTeamsTree->insert(*team, team);
-
+    
     team->updateTeamSpirit(spirit);
 
 	return StatusType::SUCCESS;
@@ -126,7 +127,7 @@ output_t<int> world_cup_t::num_played_games_for_player(int playerId)
 
 StatusType world_cup_t::add_player_cards(int playerId, int cards)
 {
-	if(playerId <=0 || cards <=0) return StatusType::INVALID_INPUT;
+	if(playerId <=0 || cards <0) return StatusType::INVALID_INPUT;
 
     // Check if players exists/ team is still in system
     UnionNode* teamUniNode = m_playersUF->find(playerId);
@@ -167,18 +168,46 @@ output_t<int> world_cup_t::get_team_points(int teamId)
 
 output_t<int> world_cup_t::get_ith_pointless_ability(int i)
 {
-	// TODO: Your code goes here
-	return 12345;
+    if(i < 0 || i>=m_teamsNum) return output_t<int>(StatusType::INVALID_INPUT);
+	// use select from ability tree and return the id
 }
 
 output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
 {
-	// TODO: Your code goes here
+    if(playerId <=0) return output_t<permutation_t>(StatusType::INVALID_INPUT);
+    // Check if players exists/ team is still in system
+    UnionNode* teamUniNode = m_playersUF->find(playerId);
+    if(teamUniNode == nullptr || !(teamUniNode->m_team->isInSystem())) return StatusType::FAILURE;
+
+    // TODO: call calculatePartialSpirit
+
 	return permutation_t();
 }
 
 StatusType world_cup_t::buy_team(int teamId1, int teamId2)
 {
-	// TODO: Your code goes here
+    if(teamId1 <= 0 || teamId2 <= 0 || teamId1 == teamId2) return StatusType::INVALID_INPUT;
+
+    // check if both teams exist
+    TreeNode<int, Team*>*  teamNode1= m_idTeamsTree->find(teamId1);
+    TreeNode<int, Team*>*  teamNode2= m_idTeamsTree->find(teamId2);
+    if(!teamNode1 || !teamNode2) return StatusType::FAILURE;
+    Team* team1 = teamNode1->m_data;
+    Team* team2 = teamNode2->m_data;
+
+    m_playersUF->buyTeam(team1,team2);
+
+    // remove the "Buyer" team and insert it back with the
+    // new calculated total ability
+    m_abilityTeamsTree->deleteByKey(*team1);
+    team1->updateStatsFromOtherTeam(team2);
+    m_abilityTeamsTree->insert(*team1, team1);
+
+    // Remove the second team
+    m_idTeamsTree->deleteByKey(team2->getId());
+    m_abilityTeamsTree->deleteByKey(*team2);
+
+    m_teamsNum -=1;
+    m_playersUF->print();
 	return StatusType::SUCCESS;
 }
