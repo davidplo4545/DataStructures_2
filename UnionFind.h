@@ -25,6 +25,7 @@ public:
     UnionNode* find(int id); //not finished
     void unite(UnionNode* buyerNode, UnionNode* boughtNode); //not finished
     int calculateGamesPlayed(int id);
+    permutation_t calculateSpirit(int id);
     void buyTeam(Team* buyer, Team* bought);
     void createUnionNode(HashNode* newHashNode, Player* player, Team* team);
     void insertPlayer(Player* player, Team* team);

@@ -87,7 +87,7 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
     m_abilityTeamsTree->deleteByKey(*team);
     team->raiseAbility(ability);
     m_abilityTeamsTree->insert(*team, team);
-    
+
     team->updateTeamSpirit(spirit);
 
 	return StatusType::SUCCESS;
@@ -179,9 +179,15 @@ output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
     UnionNode* teamUniNode = m_playersUF->find(playerId);
     if(teamUniNode == nullptr || !(teamUniNode->m_team->isInSystem())) return StatusType::FAILURE;
 
-    // TODO: call calculatePartialSpirit
-
-	return permutation_t();
+    permutation_t partialSpirit;
+    try{
+        partialSpirit = m_playersUF->calculateSpirit(playerId);
+    }
+    catch(FailureError &e)
+    {
+        return output_t<permutation_t>(StatusType::FAILURE);
+    }
+	return output_t<permutation_t>(partialSpirit);
 }
 
 StatusType world_cup_t::buy_team(int teamId1, int teamId2)

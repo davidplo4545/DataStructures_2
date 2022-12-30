@@ -83,7 +83,6 @@ void UnionFind::buyTeam(Team* buyer, Team* bought)
             if(uniNodeBought != nullptr)
                 uniNodeBought->m_team = buyer;
         }
-        // TODO: THINK WHEN THE TEAMS ARE EMPTY WHAT TO DO
     }
 
 }
@@ -105,14 +104,14 @@ void UnionFind::createUnionNode(HashNode* newHashNode, Player* player, Team* tea
         lastNode->next->team = team;
         lastNode=lastNode->next;
         ////////
-        // TODO:Update permutation/gamesPlayed REQUIRED
+        // TODO:Update permutation REQUIRED
     }
     else{
         UnionNode* rootUniNode = team->getRootUnionNode();
         newUniNode->m_parent=rootUniNode;
         newUniNode->m_extraGamesPlayed=-team->getGamesPlayed();
 
-        // TODO:Update permutation/gamesPlayed REQUIRED
+        // TODO:Update permutation REQUIRED
 
     }
 }
@@ -133,6 +132,26 @@ int UnionFind::calculateGamesPlayed(int id)
     }
     result+=currNode->m_extraGamesPlayed;
     result+=currNode->m_team->getGamesPlayed();
+    return result;
+}
+
+permutation_t UnionFind::calculateSpirit(int id)
+{
+    HashNode* hsNode =  m_hashTable->find(id);
+    if(hsNode == nullptr) throw FailureError();
+
+    UnionNode* currNode = hsNode->uniNode;
+    Player* player = hsNode->m_player;
+    // TODO: Check how the calculation will be made
+//    int result = player->getGamesPlayed();
+    permutation_t result;
+    while(currNode->m_parent)
+    {
+        result = result*currNode->m_extraPermutation;
+        currNode= currNode->m_parent;
+    }
+//    result+=currNode->m_extraGamesPlayed;
+//    result+=currNode->m_team->getGamesPlayed();
     return result;
 }
 

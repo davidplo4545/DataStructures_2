@@ -24,10 +24,11 @@ public:
     void updateGamesPlayedByFactor(int factor);
 
     int getId() const;
-    permutation_t getSpirit() const;
     int getGamesPlayed() const;
     int getAbility() const;
     int getCards() const;
+
+    permutation_t getSpirit() const;
     void addCards(int num);
 
     bool isGoalKeeper() const;
