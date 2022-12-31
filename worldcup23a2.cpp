@@ -34,6 +34,8 @@ StatusType world_cup_t::add_team(int teamId)
     {
         return StatusType::ALLOCATION_ERROR;
     }
+    m_idTeamsTree->printBT();
+
     return StatusType::SUCCESS;
 }
 

@@ -93,8 +93,8 @@ void AVLTree<Key,Value>::insertAux(Key key, Node* newNode, Node* currNode)
 
         if(currNode->m_leftSon != nullptr)
         {
-            insertAux(key, newNode, currNode->m_leftSon);
             currNode->m_weight+=1;
+            insertAux(key, newNode, currNode->m_leftSon);
         }
         else
         {
@@ -111,8 +111,8 @@ void AVLTree<Key,Value>::insertAux(Key key, Node* newNode, Node* currNode)
 
         if(currNode->m_rightSon != nullptr)
         {
-            insertAux(key, newNode, currNode->m_rightSon);
             currNode->m_weight+=1;
+            insertAux(key, newNode, currNode->m_rightSon);
         }
         else
         {
