@@ -6,6 +6,7 @@ namespace MyTests{
     bool simpleTeamInsert();
     bool invalidTeamInsert();
     bool failedTeamInsert();
+    bool simpleAbilityTest();
 //
     bool simplePlayerInsert();
 //    bool invalidInputPlayerInsert();
@@ -23,23 +24,24 @@ namespace MyTests{
 }
 
 std::function<bool()> testsList[] = {
-        MyTests::simpleGamesPlayed,
-        MyTests::simpleGamesPlayedWithGetCards,
-        MyTests::simpleGamesPlayedWithMatches,
-        MyTests::simpleTeamBuysTeam,
-        MyTests::buyTeamAndPlayMatch,
-        MyTests::teamBuysEmptyTeam,
-        MyTests::emptyTeamBuysTeam,
-        MyTests::emptyTeamBuysEmptyTeam,
-        MyTests::teamBuysTeamAndAddPlayers,
-        MyTests::multipleTeamBuys,
+        MyTests::simpleAbilityTest,
+//        MyTests::simpleGamesPlayed,
+//        MyTests::simpleGamesPlayedWithGetCards,
+//        MyTests::simpleGamesPlayedWithMatches,
+//        MyTests::simpleTeamBuysTeam,
+//        MyTests::buyTeamAndPlayMatch,
+//        MyTests::teamBuysEmptyTeam,
+//        MyTests::emptyTeamBuysTeam,
+//        MyTests::emptyTeamBuysEmptyTeam,
+//        MyTests::teamBuysTeamAndAddPlayers,
+//        MyTests::multipleTeamBuys,
 //         Team Tests
-        MyTests::simpleTeamInsert,
-        MyTests::invalidTeamInsert,
-        MyTests::failedTeamInsert,
+//        MyTests::simpleTeamInsert,
+//        MyTests::invalidTeamInsert,
+//        MyTests::failedTeamInsert,
 //
 //        // Player Tests
-        MyTests::simplePlayerInsert,
+//        MyTests::simplePlayerInsert,
 //        MyTests::invalidInputPlayerInsert,
 //        MyTests::failedPlayerInsert,
 };

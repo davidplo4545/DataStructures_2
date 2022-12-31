@@ -171,9 +171,11 @@ output_t<int> world_cup_t::get_team_points(int teamId)
 
 output_t<int> world_cup_t::get_ith_pointless_ability(int i)
 {
-    if(i < 0 || i>=m_teamsNum) return output_t<int>(StatusType::INVALID_INPUT);
-	// use select from ability tree and return the id
-    return StatusType::SUCCESS;
+    if(i < 0 || i>=m_teamsNum) return output_t<int>(StatusType::FAILURE);
+    m_abilityTeamsTree->printBT();
+    int resultId = m_abilityTeamsTree->select(i)->getId();
+
+    return output_t<int>(resultId);
 }
 
 output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)

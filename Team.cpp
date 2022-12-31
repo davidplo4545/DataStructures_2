@@ -25,7 +25,7 @@ Team::Team(const Team& team)
     m_id = team.m_id;
     m_playersNum = 0;
     m_gamesPlayed = 0;
-    m_goalKeepersNum = 1;
+    m_goalKeepersNum = team.getGoalKeepers();
     m_isInSystem = team.m_isInSystem;
     m_points = team.m_points;
     m_rootUniNode = nullptr;
@@ -70,6 +70,7 @@ int Team::playMatch(Team* rival) {
 
 std::ostream& operator<<(std::ostream& os, const Team& team)
 {
+    os<< "TEAM: ID:" << team.m_id;
     return os;
 }
 
