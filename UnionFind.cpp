@@ -19,21 +19,30 @@ UnionNode* UnionFind::find(int id) { //update during shrink
     UnionNode *temp = uf;
     UnionNode *root=nullptr;
     int sum=0;
+    permutation_t totalPermutation = permutation_t::neutral();
     if (uf) {
         while (uf->m_parent) {
             sum+=uf->m_extraGamesPlayed;
+            totalPermutation = totalPermutation * uf->m_extraPermutation.inv();
             uf = uf->m_parent;
         }
         root = uf;
         uf = temp;
         int currGamesPlayed = 0;
         int currSum = 0;
+
+        totalPermutation = totalPermutation.inv();
+        permutation_t currPermutation = permutation_t::neutral();
+        permutation_t currTotalPermutation = permutation_t::neutral();
         while (uf->m_parent){
             temp = uf->m_parent;
             uf->m_parent = root;
+            currPermutation = uf->m_extraPermutation;
             currGamesPlayed = uf->m_extraGamesPlayed;
             uf->m_extraGamesPlayed = sum - currSum;
+            uf->m_extraPermutation = currTotalPermutation.inv() * totalPermutation;
             currSum += currGamesPlayed;
+            currTotalPermutation = currTotalPermutation * currPermutation.inv();
             uf = temp;
         }
         return root;
@@ -46,16 +55,17 @@ void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
     {
         boughtNode->m_parent = buyerNode;
         boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
-        // TODO: Update Spirit here
+        boughtNode->m_extraPermutation=(buyerNode->m_extraPermutation.inv())*buyerNode->m_team->getTeamSpirit()*boughtNode->m_extraPermutation;
     }
     else
     {
         buyerNode->m_parent = boughtNode;
         boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
+        boughtNode->m_extraPermutation=buyerNode->m_team->getTeamSpirit()*boughtNode->m_extraPermutation;
+        buyerNode->m_extraPermutation=boughtNode->m_extraPermutation.inv()*buyerNode->m_extraPermutation;
 
         boughtNode->m_team = buyerNode->m_team;
         buyerNode->m_team->setRootUnionNode(boughtNode);
-        // TODO: Update Spirit here
     }
 }
 
@@ -74,12 +84,12 @@ void UnionFind::buyTeam(Team* buyer, Team* bought)
         {
             buyer->setRootUnionNode(uniNodeBought);
             buyer->setGamesPlayed(bought->getGamesPlayed());
+            buyer->updateTeamSpirit(bought->getTeamSpirit());
             ///// TESTING PURPOSES
             lastNode->next = new TestNode();
             lastNode->next->team = buyer;
             lastNode=lastNode->next;
             ////////
-            // TODO: Update spirit (maybe inside unite)
             if(uniNodeBought != nullptr)
                 uniNodeBought->m_team = buyer;
         }
@@ -98,21 +108,19 @@ void UnionFind::createUnionNode(HashNode* newHashNode, Player* player, Team* tea
         newUniNode->m_team=team;
         team->setRootUnionNode(newUniNode);
         newUniNode->m_extraGamesPlayed=0;
+        newUniNode->m_extraPermutation=player->getSpirit();
         player->updateGamesPlayedByFactor(team->getGamesPlayed());
         ///// TESTING PURPOSES
         lastNode->next = new TestNode();
         lastNode->next->team = team;
         lastNode=lastNode->next;
         ////////
-        // TODO:Update permutation REQUIRED
     }
     else{
         UnionNode* rootUniNode = team->getRootUnionNode();
         newUniNode->m_parent=rootUniNode;
         newUniNode->m_extraGamesPlayed=-team->getGamesPlayed();
-
-        // TODO:Update permutation REQUIRED
-
+        newUniNode->m_extraPermutation=rootUniNode->m_extraPermutation.inv()*team->getTeamSpirit()*player->getSpirit();
     }
 }
 
@@ -141,18 +149,14 @@ permutation_t UnionFind::calculateSpirit(int id)
     if(hsNode == nullptr) throw FailureError();
 
     UnionNode* currNode = hsNode->uniNode;
-    Player* player = hsNode->m_player;
-    // TODO: Check how the calculation will be made
-//    int result = player->getGamesPlayed();
-    permutation_t result;
-    while(currNode->m_parent)
+
+    permutation_t result = permutation_t::neutral();
+    while(currNode)
     {
-        result = result*currNode->m_extraPermutation;
+        result = result*((currNode->m_extraPermutation).inv());
         currNode= currNode->m_parent;
     }
-//    result+=currNode->m_extraGamesPlayed;
-//    result+=currNode->m_team->getGamesPlayed();
-    return result;
+    return result.inv();
 }
 
 void UnionFind::insertPlayer(Player *player, Team *team) {

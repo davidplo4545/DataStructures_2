@@ -170,6 +170,7 @@ output_t<int> world_cup_t::get_ith_pointless_ability(int i)
 {
     if(i < 0 || i>=m_teamsNum) return output_t<int>(StatusType::INVALID_INPUT);
 	// use select from ability tree and return the id
+    return StatusType::SUCCESS;
 }
 
 output_t<permutation_t> world_cup_t::get_partial_spirit(int playerId)
@@ -214,6 +215,6 @@ StatusType world_cup_t::buy_team(int teamId1, int teamId2)
     m_abilityTeamsTree->deleteByKey(*team2);
 
     m_teamsNum -=1;
-    m_playersUF->print();
+//    m_playersUF->print();
 	return StatusType::SUCCESS;
 }

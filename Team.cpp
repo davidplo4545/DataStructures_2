@@ -97,6 +97,7 @@ void Team::updateStatsFromOtherTeam(Team *other) {
     this->updateTotalAbility(other->getTotalAbility());
     this->increasePlayerCount(other->getPlayersCount());
     this->increaseGoalKeepers(other->getGoalKeepers());
+    this->updateTeamSpirit(other->getTeamSpirit());
 }
 
 int Team::getPlayersCount() const {
@@ -107,6 +108,7 @@ int Team::getGoalKeepers() const {
     return m_goalKeepersNum;
 }
 
+permutation_t Team::getTeamSpirit() const { return m_teamSpirit;}
 int Team::getGamesPlayed() const {
     return m_gamesPlayed;
 }

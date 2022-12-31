@@ -9,4 +9,6 @@ num_played_games_for_player 1001
 add_player_cards 2001 2
 get_player_cards 2001
 get_team_points 1
+get_ith_pointless_ability 0
+get_partial_spirit 1001
 buy_team 1 2

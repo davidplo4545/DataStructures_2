@@ -59,6 +59,7 @@ public:
     int getTotalAbility() const;
     int getGoalKeepers() const;
 
+    permutation_t getTeamSpirit() const;
     int playMatch(Team *rival);
 
 };
