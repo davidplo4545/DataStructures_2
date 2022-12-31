@@ -7,6 +7,11 @@
 
 HashNode::HashNode() :m_player(nullptr),m_playerKey(-1), chainNext(nullptr), uniNode(nullptr){}
 
+HashNode::~HashNode()
+{
+    delete m_player;
+    delete uniNode;
+}
 
 HashTable::HashTable() : m_size(HashTable::MIN_SIZE), m_currSize(0) {
     m_table = new HashNode*[m_size];
@@ -23,7 +28,6 @@ HashTable::~HashTable(){
         while(nodeToDelete != nullptr)
         {
             temp = nodeToDelete->chainNext;
-            delete nodeToDelete->uniNode;
             delete nodeToDelete;
             nodeToDelete = temp;
         }
@@ -88,6 +92,7 @@ void HashTable::insertToNewTable(HashNode* newNode, HashNode** newTable) const
     HashNode* currNode = newTable[newIndex];
     if(currNode->m_playerKey == -1)
     {
+        delete newTable[newIndex];
         newTable[newIndex] = newNode;
         return;
     }
@@ -114,12 +119,18 @@ void HashTable::increaseArraySize() {
     auto newTable = new HashNode*[2*m_size];
     initTable(newTable, 2*m_size);
     HashNode* currNode;
+
     HashNode* temp;
     for(int i=0;i<m_size;i++)
     {
         currNode = m_table[i];
-        while(currNode != nullptr && currNode->m_playerKey != -1)
+        while(currNode != nullptr)
         {
+            if(currNode->m_player == nullptr)
+            {
+                delete currNode;
+                break;
+            }
             temp = currNode->chainNext;
             currNode->chainNext = nullptr;
             insertToNewTable(currNode, newTable);
@@ -127,6 +138,7 @@ void HashTable::increaseArraySize() {
         }
     }
     m_size *=2;
+
     delete [] m_table;
     m_table = newTable;
 }
@@ -142,6 +154,8 @@ void HashTable::printTable()
         {
             if(currNode->m_playerKey != -1)
                 std::cout << currNode->m_playerKey << "-->";
+            else
+                std::cout << " another node" ;
             currNode = currNode->chainNext;
         }
         std::cout << "" << std::endl;

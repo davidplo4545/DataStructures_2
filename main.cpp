@@ -15,7 +15,7 @@ void printUnionFindTest()
     Team* teams [TEAMS_NUM];
     for(int i=0;i<TEAMS_NUM;i++)
         teams[i] = new Team(i);
-    for(int i=100;i<200;i++)
+    for(int i=100;i<30000;i++)
     {
         try{
             auto pl = new Player(i,permutation_t::neutral(),i%TEAMS_NUM,0,0, false);
@@ -31,20 +31,23 @@ void printUnionFindTest()
         }
     }
 
+
+//    std::cout << "PRINT TABLE" << std::endl;
+//    uf->print();
+//    uf->unite(160,161);
+//    uf->unite(162,161);
+//    uf->unite(164,163);
+//    uf->unite(165,166);
+//    uf->unite(101,193);
+//    uf->unite(101,199);
+//    uf->unite(105,107);
+//    uf->unite(124,107);
     std::cout << "PRINT TABLE" << std::endl;
-    uf->print();
-    uf->unite(160,161);
-    uf->unite(162,161);
-    uf->unite(164,163);
-    uf->unite(165,166);
-    uf->unite(101,193);
-    uf->unite(101,199);
-    uf->unite(105,107);
-    uf->unite(124,107);
-    std::cout << "PRINT TABLE" << std::endl;
-    uf->print();
+//    uf->print();
 
     delete uf;
+    for(int i=0;i<TEAMS_NUM;i++)
+        delete teams[i];
 }
 int main() {
     printUnionFindTest();

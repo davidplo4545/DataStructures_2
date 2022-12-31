@@ -11,9 +11,11 @@ world_cup_t::world_cup_t()
 
 world_cup_t::~world_cup_t()
 {
+    delete m_playersUF;
+
+    m_idTeamsTree->deleteEntireTreeData();
 	delete m_idTeamsTree;
     delete m_abilityTeamsTree;
-    delete m_playersUF;
 }
 
 StatusType world_cup_t::add_team(int teamId)
@@ -80,6 +82,7 @@ StatusType world_cup_t::add_player(int playerId, int teamId,
     }
     catch(FailureError &e)
     {
+        delete player;
         return StatusType::FAILURE;
     }
     // Remove team from the ability sorted tree and
@@ -214,6 +217,7 @@ StatusType world_cup_t::buy_team(int teamId1, int teamId2)
     m_idTeamsTree->deleteByKey(team2->getId());
     m_abilityTeamsTree->deleteByKey(*team2);
 
+    delete team2;
     m_teamsNum -=1;
 //    m_playersUF->print();
 	return StatusType::SUCCESS;

@@ -16,6 +16,7 @@ struct HashNode{
     HashNode* chainNext;
     UnionNode* uniNode;
     HashNode();
+    ~HashNode();
 };
 
 class HashTable {

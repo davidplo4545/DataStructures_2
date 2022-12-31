@@ -9,6 +9,21 @@ UnionFind::UnionFind() : m_hashTable(new HashTable())
     lastNode = testingChain;
 }
 
+UnionFind::~UnionFind() {
+    delete m_hashTable;
+
+    //// TESTING PURPOSES
+    TestNode* tempNode;
+    while(testingChain)
+    {
+        tempNode = testingChain->next;
+        delete testingChain;
+        testingChain = tempNode;
+    }
+
+    ////
+}
+
 
 HashTable* UnionFind::getTable() {
     return m_hashTable;
@@ -56,6 +71,7 @@ void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
         boughtNode->m_parent = buyerNode;
         boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
         boughtNode->m_extraPermutation=(buyerNode->m_extraPermutation.inv())*buyerNode->m_team->getTeamSpirit()*boughtNode->m_extraPermutation;
+        boughtNode->m_team=nullptr;
     }
     else
     {
@@ -65,7 +81,10 @@ void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
         buyerNode->m_extraPermutation=boughtNode->m_extraPermutation.inv()*buyerNode->m_extraPermutation;
 
         boughtNode->m_team = buyerNode->m_team;
+
         buyerNode->m_team->setRootUnionNode(boughtNode);
+        buyerNode->m_team = nullptr;
+
     }
 }
 
@@ -200,5 +219,5 @@ void UnionFind::print()
         testNode = testNode->next;
     }
 
-};
+}
 

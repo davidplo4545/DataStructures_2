@@ -13,9 +13,8 @@ UnionNode::UnionNode():
 {}
 
 UnionNode::~UnionNode() {
-    if(m_team != nullptr)
+    if(m_team != nullptr && !(m_team->isInSystem()))
         delete m_team;
-    delete m_player;
 
 }
 

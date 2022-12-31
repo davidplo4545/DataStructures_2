@@ -21,6 +21,7 @@ private:
     TestNode* lastNode;
 public:
     UnionFind(); //done
+    ~UnionFind();
     HashTable* getTable(); //done
     UnionNode* find(int id); //not finished
     void unite(UnionNode* buyerNode, UnionNode* boughtNode); //not finished

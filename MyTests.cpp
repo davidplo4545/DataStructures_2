@@ -493,6 +493,7 @@ namespace MyTests {
         output_t<int> respoints2 = obj->get_team_points(2);
         assert(respoints2.status() == StatusType::FAILURE);
 
+        delete obj;
         return true;
     }
 
@@ -547,7 +548,7 @@ namespace MyTests {
 
         output_t<int> respoints2 = obj->get_team_points(1);
         assert(respoints2.status() == StatusType::FAILURE);
-
+        delete obj;
         return true;
     }
 
@@ -570,7 +571,7 @@ namespace MyTests {
 
         output_t<int> respoints2 = obj->get_team_points(2);
         assert(respoints2.status() == StatusType::FAILURE);
-
+        delete obj;
         return true;
     }
 

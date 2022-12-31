@@ -224,29 +224,29 @@ Team.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Team.cpp.s
 .PHONY : Team.cpp.s
 
-TestMain.obj: TestMain.cpp.obj
-.PHONY : TestMain.obj
+Tests/WorldCupTests.obj: Tests/WorldCupTests.cpp.obj
+.PHONY : Tests/WorldCupTests.obj
 
 # target to build an object file
-TestMain.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/TestMain.cpp.obj
-.PHONY : TestMain.cpp.obj
+Tests/WorldCupTests.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.obj
+.PHONY : Tests/WorldCupTests.cpp.obj
 
-TestMain.i: TestMain.cpp.i
-.PHONY : TestMain.i
+Tests/WorldCupTests.i: Tests/WorldCupTests.cpp.i
+.PHONY : Tests/WorldCupTests.i
 
 # target to preprocess a source file
-TestMain.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/TestMain.cpp.i
-.PHONY : TestMain.cpp.i
+Tests/WorldCupTests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.i
+.PHONY : Tests/WorldCupTests.cpp.i
 
-TestMain.s: TestMain.cpp.s
-.PHONY : TestMain.s
+Tests/WorldCupTests.s: Tests/WorldCupTests.cpp.s
+.PHONY : Tests/WorldCupTests.s
 
 # target to generate assembly for a file
-TestMain.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/TestMain.cpp.s
-.PHONY : TestMain.cpp.s
+Tests/WorldCupTests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.s
+.PHONY : Tests/WorldCupTests.cpp.s
 
 UnionFind.obj: UnionFind.cpp.obj
 .PHONY : UnionFind.obj
@@ -341,9 +341,9 @@ help:
 	@echo ... Team.obj
 	@echo ... Team.i
 	@echo ... Team.s
-	@echo ... TestMain.obj
-	@echo ... TestMain.i
-	@echo ... TestMain.s
+	@echo ... Tests/WorldCupTests.obj
+	@echo ... Tests/WorldCupTests.i
+	@echo ... Tests/WorldCupTests.s
 	@echo ... UnionFind.obj
 	@echo ... UnionFind.i
 	@echo ... UnionFind.s

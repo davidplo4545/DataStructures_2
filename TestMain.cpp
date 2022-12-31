@@ -3,11 +3,11 @@
 #include "TestUtils.h"
 
 namespace MyTests{
-//    bool simpleTeamInsert();
-//    bool invalidTeamInsert();
-//    bool failedTeamInsert();
+    bool simpleTeamInsert();
+    bool invalidTeamInsert();
+    bool failedTeamInsert();
 //
-//    bool simplePlayerInsert();
+    bool simplePlayerInsert();
 //    bool invalidInputPlayerInsert();
 //    bool failedPlayerInsert();
     bool simpleGamesPlayed();
@@ -33,13 +33,13 @@ std::function<bool()> testsList[] = {
         MyTests::emptyTeamBuysEmptyTeam,
         MyTests::teamBuysTeamAndAddPlayers,
         MyTests::multipleTeamBuys,
-        // Team Tests
-//        MyTests::simpleTeamInsert,
-//        MyTests::invalidTeamInsert,
-//        MyTests::failedTeamInsert,
+//         Team Tests
+        MyTests::simpleTeamInsert,
+        MyTests::invalidTeamInsert,
+        MyTests::failedTeamInsert,
 //
 //        // Player Tests
-//        MyTests::simplePlayerInsert,
+        MyTests::simplePlayerInsert,
 //        MyTests::invalidInputPlayerInsert,
 //        MyTests::failedPlayerInsert,
 };
