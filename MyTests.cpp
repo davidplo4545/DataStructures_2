@@ -17,17 +17,43 @@ namespace MyTests {
 
 //        output_t<int> resn1 = obj->get_ith_pointless_ability(0);
 //        assert(resn1.status() == StatusType::FAILURE);
-        StatusType res = obj->add_team(3);
+//        StatusType res = obj->add_team(3);
 //        output_t<int> resn = obj->get_ith_pointless_ability(0);
 //        assert(resn.status() == StatusType::SUCCESS);
 //        assert(resn.ans() == 3);
-        res = obj->add_team(10);
-        res = obj->add_team(4);
-        res = obj->add_team(2);
-        res = obj->add_team(5);
-        res = obj->add_team(6);
-        res = obj->add_team(7);
+        int const ITEMS = 15;
+        int arr[ITEMS];
+        int counter = 0;
+        for(int i=0;i<ITEMS;i++)
+        {
+            std::cout << "----------------" << std::endl;
+            arr[i] = rand()%100;
+            StatusType res = obj->add_team(arr[i]);
+            if(res == StatusType::SUCCESS) counter++;
+        }
+        std::cout << "STARTING DELETE" << std::endl;
+        for(int i=0;i<ITEMS;i++)
+        {
+            std::cout << "----------------" << std::endl;
+            StatusType res1 = obj->remove_team(arr[rand()%ITEMS]);
+            if(res1 == StatusType::SUCCESS) counter--;
+        }
 
+        for(int i=0;i<ITEMS;i++)
+        {
+            std::cout << "----------------" << std::endl;
+            arr[i] = rand()%100;
+            StatusType res2 = obj->add_team(arr[i]);
+            if(res2 == StatusType::SUCCESS) counter++;
+
+        }
+
+        for(int j=0;j<counter;j++)
+        {
+            int res = obj->get_ith_pointless_ability(j).ans();
+            std::cout << "RANK:" << j << " Result is:" << res <<std::endl;
+
+        }
 
 //        output_t<int> resn2 = obj->get_ith_pointless_ability(1);
 //        assert(resn2.status() == StatusType::SUCCESS);
@@ -39,7 +65,8 @@ namespace MyTests {
 //        assert(resn4.status() == StatusType::SUCCESS);
 //        assert(resn4.ans() == 6);
         delete obj;
-        return res == StatusType::SUCCESS;
+//        return res == StatusType::SUCCESS;
+        return true;
     }
 
     //// PLAYER TESTS

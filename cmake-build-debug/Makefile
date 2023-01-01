@@ -224,30 +224,6 @@ Team.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Team.cpp.s
 .PHONY : Team.cpp.s
 
-Tests/WorldCupTests.obj: Tests/WorldCupTests.cpp.obj
-.PHONY : Tests/WorldCupTests.obj
-
-# target to build an object file
-Tests/WorldCupTests.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.obj
-.PHONY : Tests/WorldCupTests.cpp.obj
-
-Tests/WorldCupTests.i: Tests/WorldCupTests.cpp.i
-.PHONY : Tests/WorldCupTests.i
-
-# target to preprocess a source file
-Tests/WorldCupTests.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.i
-.PHONY : Tests/WorldCupTests.cpp.i
-
-Tests/WorldCupTests.s: Tests/WorldCupTests.cpp.s
-.PHONY : Tests/WorldCupTests.s
-
-# target to generate assembly for a file
-Tests/WorldCupTests.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/Tests/WorldCupTests.cpp.s
-.PHONY : Tests/WorldCupTests.cpp.s
-
 UnionFind.obj: UnionFind.cpp.obj
 .PHONY : UnionFind.obj
 
@@ -296,6 +272,30 @@ UnionNode.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/UnionNode.cpp.s
 .PHONY : UnionNode.cpp.s
 
+main23a2.obj: main23a2.cpp.obj
+.PHONY : main23a2.obj
+
+# target to build an object file
+main23a2.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/main23a2.cpp.obj
+.PHONY : main23a2.cpp.obj
+
+main23a2.i: main23a2.cpp.i
+.PHONY : main23a2.i
+
+# target to preprocess a source file
+main23a2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/main23a2.cpp.i
+.PHONY : main23a2.cpp.i
+
+main23a2.s: main23a2.cpp.s
+.PHONY : main23a2.s
+
+# target to generate assembly for a file
+main23a2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataStruct2.dir\build.make CMakeFiles/DataStruct2.dir/main23a2.cpp.s
+.PHONY : main23a2.cpp.s
+
 worldcup23a2.obj: worldcup23a2.cpp.obj
 .PHONY : worldcup23a2.obj
 
@@ -341,15 +341,15 @@ help:
 	@echo ... Team.obj
 	@echo ... Team.i
 	@echo ... Team.s
-	@echo ... Tests/WorldCupTests.obj
-	@echo ... Tests/WorldCupTests.i
-	@echo ... Tests/WorldCupTests.s
 	@echo ... UnionFind.obj
 	@echo ... UnionFind.i
 	@echo ... UnionFind.s
 	@echo ... UnionNode.obj
 	@echo ... UnionNode.i
 	@echo ... UnionNode.s
+	@echo ... main23a2.obj
+	@echo ... main23a2.i
+	@echo ... main23a2.s
 	@echo ... worldcup23a2.obj
 	@echo ... worldcup23a2.i
 	@echo ... worldcup23a2.s

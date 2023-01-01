@@ -34,7 +34,7 @@ StatusType world_cup_t::add_team(int teamId)
     {
         return StatusType::ALLOCATION_ERROR;
     }
-    m_idTeamsTree->printBT();
+//    m_abilityTeamsTree->printBT();
 
     return StatusType::SUCCESS;
 }
@@ -61,6 +61,7 @@ StatusType world_cup_t::remove_team(int teamId)
             delete team;
         }
     }
+//    m_abilityTeamsTree->printBT();
 	return StatusType::SUCCESS;
 }
 
@@ -174,8 +175,8 @@ output_t<int> world_cup_t::get_team_points(int teamId)
 output_t<int> world_cup_t::get_ith_pointless_ability(int i)
 {
     if(i < 0 || i>=m_teamsNum) return output_t<int>(StatusType::FAILURE);
-    m_abilityTeamsTree->printBT();
-    int resultId = m_abilityTeamsTree->select(i)->getId();
+//    m_abilityTeamsTree->printBT();
+    int resultId = m_abilityTeamsTree->select(i+1)->getId();
 
     return output_t<int>(resultId);
 }

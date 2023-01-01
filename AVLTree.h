@@ -30,7 +30,7 @@ public:
     Node* insert(Key key, Value data);
     Node* find(Key key);
     Value select(int rank);
-    TreeNode<Key,Value>* selectAux(TreeNode<Key,Value> * node, int rank, int counter);
+    TreeNode<Key,Value>* selectAux(TreeNode<Key,Value> * node, int index) const;
     Node* getRoot();
 
     void printBT(const std::string& prefix,const Node* node, bool isLeft) const;
@@ -217,6 +217,7 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::deleteByKeyAux(Key key, Node* root, boo
         Node* closest = currNode->m_rightSon;
         while(closest->m_leftSon!= nullptr) {
             parent = closest;
+            closest->m_weight -=1;
             closest = closest->m_leftSon;
         }
         // the current node is the parent of the closest
@@ -238,6 +239,7 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::deleteByKeyAux(Key key, Node* root, boo
         // copy the data from one node to another
         currNode->m_key = closest->m_key;
         currNode->m_data = closest->m_data;
+        currNode->m_weight-=1;
         if(hasDataChanged) *hasDataChanged = true;
         delete closest;
         return currNode;
@@ -283,27 +285,23 @@ TreeNode<Key,Value>* AVLTree<Key,Value>::find(Key key)
     return resultNode;
 }
 
+
 template<class Key, class Value>
-TreeNode<Key,Value>* AVLTree<Key,Value>::selectAux(TreeNode<Key,Value>* node, int rank, int counter)
-{
-    if(node == nullptr) return nullptr;
-
-    TreeNode<Key,Value>* left = selectAux(node->m_leftSon, rank, counter);
-    if(left != nullptr) return left;
-
-    counter++;
-    if(counter == rank) return node;
-
-    TreeNode<Key,Value>* right = selectAux(node->m_rightSon, rank, counter);
-    if(right != nullptr) return right;
-
-    return nullptr;
+TreeNode<Key,Value>* AVLTree<Key,Value>::selectAux(TreeNode<Key,Value>* node,int rank) const{
+    int weight = node->m_leftSon ? node->m_leftSon->m_weight : 0;
+    if(weight == rank -1)
+        return node;
+    else if(weight > rank - 1)
+        return selectAux(node->m_leftSon, rank);
+    else
+        return selectAux(node->m_rightSon, rank - (weight + 1));
 }
+
 
 template<class Key, class Value>
 Value AVLTree<Key,Value>::select(int rank)
 {
-    TreeNode<Key,Value>* resultNode = selectAux(m_root, rank, -1);
+    TreeNode<Key,Value>* resultNode = selectAux(m_root, rank);
 
     // Used find() before to check if the node even exists
     return resultNode->m_data;
