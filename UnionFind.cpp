@@ -30,7 +30,9 @@ HashTable* UnionFind::getTable() {
 }
 
 UnionNode* UnionFind::find(int id) { //update during shrink
-    UnionNode *uf = m_hashTable->find(id)->uniNode;
+    HashNode* hsNode = m_hashTable->find(id);
+    if(hsNode == nullptr) return nullptr;
+    UnionNode *uf = hsNode->uniNode;
     UnionNode *temp = uf;
     UnionNode *root=nullptr;
     int sum=0;
@@ -76,10 +78,12 @@ void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
     else
     {
         buyerNode->m_parent = boughtNode;
-        boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
+        buyerNode->m_extraGamesPlayed += buyerNode->m_team->getGamesPlayed() - boughtNode->m_team->getGamesPlayed();
+//        boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
         boughtNode->m_extraPermutation=buyerNode->m_team->getTeamSpirit()*boughtNode->m_extraPermutation;
         buyerNode->m_extraPermutation=boughtNode->m_extraPermutation.inv()*buyerNode->m_extraPermutation;
 
+        buyerNode->m_team->setGamesPlayed(boughtNode->m_team->getGamesPlayed());
         boughtNode->m_team = buyerNode->m_team;
 
         buyerNode->m_team->setRootUnionNode(boughtNode);

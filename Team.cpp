@@ -54,7 +54,7 @@ int Team::playMatch(Team* rival) {
         this->updatePoints(3);
         return 2;
     }
-    else if(m_teamSpirit.strength() > rival->m_teamSpirit.strength())
+    else if(m_teamSpirit.strength() < rival->m_teamSpirit.strength())
     {
         rival->updatePoints(3);
         return 4;
