@@ -47,19 +47,18 @@ UnionNode* UnionFind::find(int id) { //update during shrink
         uf = temp;
         int currGamesPlayed = 0;
         int currSum = 0;
-
         totalPermutation = totalPermutation.inv();
         permutation_t currPermutation = permutation_t::neutral();
-        permutation_t currTotalPermutation = permutation_t::neutral();
+        permutation_t toSubtract = permutation_t::neutral();
         while (uf->m_parent){
             temp = uf->m_parent;
             uf->m_parent = root;
             currPermutation = uf->m_extraPermutation;
             currGamesPlayed = uf->m_extraGamesPlayed;
             uf->m_extraGamesPlayed = sum - currSum;
-            uf->m_extraPermutation = currTotalPermutation.inv() * totalPermutation;
+            uf->m_extraPermutation =  totalPermutation * toSubtract;
             currSum += currGamesPlayed;
-            currTotalPermutation = currTotalPermutation * currPermutation.inv();
+            toSubtract = toSubtract * currPermutation.inv();
             uf = temp;
         }
         return root;
@@ -70,6 +69,7 @@ void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
 
     if(buyerNode->m_team->getPlayersCount() >= boughtNode->m_team->getPlayersCount())
     {
+//        std::cout << buyerNode->m_team->getId() << " is bigger and Buys " << boughtNode->m_team->getId() << std::endl;
         boughtNode->m_parent = buyerNode;
         boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
         boughtNode->m_extraPermutation=(buyerNode->m_extraPermutation.inv())*buyerNode->m_team->getTeamSpirit()*boughtNode->m_extraPermutation;
@@ -77,11 +77,12 @@ void UnionFind::unite(UnionNode* buyerNode, UnionNode* boughtNode) {
     }
     else
     {
+//        std::cout << buyerNode->m_team->getId() << " is smaller and Buys " << boughtNode->m_team->getId() << std::endl;
         buyerNode->m_parent = boughtNode;
-        buyerNode->m_extraGamesPlayed += buyerNode->m_team->getGamesPlayed() - boughtNode->m_team->getGamesPlayed();
+        buyerNode->m_extraGamesPlayed = buyerNode->m_team->getGamesPlayed() - boughtNode->m_team->getGamesPlayed();
 //        boughtNode->m_extraGamesPlayed=boughtNode->m_team->getGamesPlayed() - buyerNode->m_team->getGamesPlayed();
-        boughtNode->m_extraPermutation=buyerNode->m_team->getTeamSpirit()*boughtNode->m_extraPermutation;
-        buyerNode->m_extraPermutation=boughtNode->m_extraPermutation.inv()*buyerNode->m_extraPermutation;
+        boughtNode->m_extraPermutation=(buyerNode->m_team->getTeamSpirit())*(boughtNode->m_extraPermutation);
+        buyerNode->m_extraPermutation=(boughtNode->m_extraPermutation.inv())*(buyerNode->m_extraPermutation);
 
         buyerNode->m_team->setGamesPlayed(boughtNode->m_team->getGamesPlayed());
         boughtNode->m_team = buyerNode->m_team;
@@ -101,13 +102,14 @@ void UnionFind::buyTeam(Team* buyer, Team* bought)
     if(uniNodeBought && uniNodeBuyer)
     {
         unite(uniNodeBuyer, uniNodeBought);
+//        buyer->updateTeamSpirit(bought->getTeamSpirit());
     }
     else{
         if(uniNodeBuyer == nullptr)
         {
             buyer->setRootUnionNode(uniNodeBought);
             buyer->setGamesPlayed(bought->getGamesPlayed());
-            buyer->updateTeamSpirit(bought->getTeamSpirit());
+//            buyer->updateTeamSpirit(bought->getTeamSpirit());
             ///// TESTING PURPOSES
             lastNode->next = new TestNode();
             lastNode->next->team = buyer;

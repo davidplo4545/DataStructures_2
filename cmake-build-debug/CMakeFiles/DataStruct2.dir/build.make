@@ -166,19 +166,19 @@ CMakeFiles/DataStruct2.dir/MyTests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DataStruct2.dir/MyTests.cpp.s"
 	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\david\Desktop\DataStructures_2\MyTests.cpp -o CMakeFiles\DataStruct2.dir\MyTests.cpp.s
 
-CMakeFiles/DataStruct2.dir/main23a2.cpp.obj: CMakeFiles/DataStruct2.dir/flags.make
-CMakeFiles/DataStruct2.dir/main23a2.cpp.obj: C:/Users/david/Desktop/DataStructures_2/main23a2.cpp
-CMakeFiles/DataStruct2.dir/main23a2.cpp.obj: CMakeFiles/DataStruct2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\david\Desktop\DataStructures_2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DataStruct2.dir/main23a2.cpp.obj"
-	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DataStruct2.dir/main23a2.cpp.obj -MF CMakeFiles\DataStruct2.dir\main23a2.cpp.obj.d -o CMakeFiles\DataStruct2.dir\main23a2.cpp.obj -c C:\Users\david\Desktop\DataStructures_2\main23a2.cpp
+CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj: CMakeFiles/DataStruct2.dir/flags.make
+CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj: C:/Users/david/Desktop/DataStructures_2/UnitTests/UnitTests.cpp
+CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj: CMakeFiles/DataStruct2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\david\Desktop\DataStructures_2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj -MF CMakeFiles\DataStruct2.dir\UnitTests\UnitTests.cpp.obj.d -o CMakeFiles\DataStruct2.dir\UnitTests\UnitTests.cpp.obj -c C:\Users\david\Desktop\DataStructures_2\UnitTests\UnitTests.cpp
 
-CMakeFiles/DataStruct2.dir/main23a2.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DataStruct2.dir/main23a2.cpp.i"
-	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\david\Desktop\DataStructures_2\main23a2.cpp > CMakeFiles\DataStruct2.dir\main23a2.cpp.i
+CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.i"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\david\Desktop\DataStructures_2\UnitTests\UnitTests.cpp > CMakeFiles\DataStruct2.dir\UnitTests\UnitTests.cpp.i
 
-CMakeFiles/DataStruct2.dir/main23a2.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DataStruct2.dir/main23a2.cpp.s"
-	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\david\Desktop\DataStructures_2\main23a2.cpp -o CMakeFiles\DataStruct2.dir\main23a2.cpp.s
+CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.s"
+	C:\TDM-GCC-64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\david\Desktop\DataStructures_2\UnitTests\UnitTests.cpp -o CMakeFiles\DataStruct2.dir\UnitTests\UnitTests.cpp.s
 
 # Object files for target DataStruct2
 DataStruct2_OBJECTS = \
@@ -189,7 +189,7 @@ DataStruct2_OBJECTS = \
 "CMakeFiles/DataStruct2.dir/Team.cpp.obj" \
 "CMakeFiles/DataStruct2.dir/UnionNode.cpp.obj" \
 "CMakeFiles/DataStruct2.dir/MyTests.cpp.obj" \
-"CMakeFiles/DataStruct2.dir/main23a2.cpp.obj"
+"CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj"
 
 # External object files for target DataStruct2
 DataStruct2_EXTERNAL_OBJECTS =
@@ -201,7 +201,7 @@ DataStruct2.exe: CMakeFiles/DataStruct2.dir/Player.cpp.obj
 DataStruct2.exe: CMakeFiles/DataStruct2.dir/Team.cpp.obj
 DataStruct2.exe: CMakeFiles/DataStruct2.dir/UnionNode.cpp.obj
 DataStruct2.exe: CMakeFiles/DataStruct2.dir/MyTests.cpp.obj
-DataStruct2.exe: CMakeFiles/DataStruct2.dir/main23a2.cpp.obj
+DataStruct2.exe: CMakeFiles/DataStruct2.dir/UnitTests/UnitTests.cpp.obj
 DataStruct2.exe: CMakeFiles/DataStruct2.dir/build.make
 DataStruct2.exe: CMakeFiles/DataStruct2.dir/linklibs.rsp
 DataStruct2.exe: CMakeFiles/DataStruct2.dir/objects1.rsp

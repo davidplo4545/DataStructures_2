@@ -124,7 +124,10 @@
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/UnionNode.h">
 			<Option target="DataStruct2"/>
 		</Unit>
-		<Unit filename="C:/Users/david/Desktop/DataStructures_2/main23a2.cpp">
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/UnitTests/UnitTests.cpp">
+			<Option target="DataStruct2"/>
+		</Unit>
+		<Unit filename="C:/Users/david/Desktop/DataStructures_2/UnitTests/catch.hpp">
 			<Option target="DataStruct2"/>
 		</Unit>
 		<Unit filename="C:/Users/david/Desktop/DataStructures_2/wet2util.h">
